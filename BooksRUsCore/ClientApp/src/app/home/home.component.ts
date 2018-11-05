@@ -18,7 +18,6 @@ export class HomeComponent {
       this.emotions= result;
     }, error => console.error(error));
     http.get<EmotionScore[]>(baseUrl + 'api/emotionscore/GetAllEmotionScores').subscribe(result => {
-  
       this.emotionScore = result;
     }, error => console.error(error));
   }

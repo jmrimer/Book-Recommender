@@ -10,12 +10,15 @@
     <tr>
       <th>Title</th>
       <th>Author</th>
+      <th> Book Image</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let book of books">
       <td>{{ book.title }}</td>
       <td>{{ book.author}}</td>
+      <img style="width: 150px; height: 200px" [src]="book.pictureFilePath" />
+
     </tr>
   </tbody>
 </table>
