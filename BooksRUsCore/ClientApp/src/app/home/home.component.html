@@ -9,13 +9,43 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Author</th>     
+      <th>Author</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let book of books">
       <td>{{ book.title }}</td>
-      <td>{{ book.author}}</td>      
+      <td>{{ book.author}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th> Emotion </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emotion of emotions">
+      <td>{{ emotion.emotion}}</td>    
+    </tr>
+  </tbody>
+</table>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>emotion ID </th>
+      <th>Book ID</th>
+      <th> Emotion Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let score of emotionScore">
+      <td>{{ score.emotionid}}</td>
+      <td>{{ score.bookid}}</td>
+      <td>{{ score.score}}</td>
     </tr>
   </tbody>
 </table>
