@@ -5,7 +5,7 @@
 
 <p *ngIf="!books"><em>Loading...</em></p>
 
-<table class='table'>
+<!--<table class='table'>
   <thead>
     <tr>
       <th>Title</th>
@@ -21,9 +21,27 @@
 
     </tr>
   </tbody>
-</table>
+</table>-->
 
-<table class='table'>
+<!--<ul class="book-list">
+  <li *ngFor="let emotionRank of emotionRanking">
+    {{emotionRank.emotion}} <br /> <img style="width: 150px; height: 200px" [src]="emotionRank.pictureFilePath" /> <br />{{emotionRank.title}} <br /> {{emotionRank.author}}
+
+  </li>
+</ul>-->
+
+<div class="col-lg-4 book-group" *ngFor="let emotionRank of emotionRanking">
+  <div class="emotion-ranked">
+    {{emotionRank.emotion}}
+    <div class="cover">
+      <img style="width: 150px; height: 200px" [src]="emotionRank.pictureFilePath" />
+    </div>
+    <div class="title">{{emotionRank.title}}</div>
+    <div class="author">{{emotionRank.author}}</div>
+  </div>
+</div>
+
+<!--<table class='table'>
   <thead>
     <tr>
       <th> Emotion </th>
@@ -51,4 +69,4 @@
       <td>{{ score.score}}</td>
     </tr>
   </tbody>
-</table>
+</table>-->
