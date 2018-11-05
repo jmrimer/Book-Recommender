@@ -21,11 +21,6 @@ namespace BooksRUsCore.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
-            string connString = "Server=db550.cecsresearch.org;Port=3306;Database=booksrus;Uid=svc_booksrus;Pwd=7FB*@H4pSKA)e&X(ga.;";
-            IBLLFactory factory = new BLLFactory(connString);
-            var emotions = factory.emotionBLL;
-            var actualEmotions = emotions.selectAllGenre();
-
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
