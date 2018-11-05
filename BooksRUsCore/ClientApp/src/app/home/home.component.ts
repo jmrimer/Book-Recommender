@@ -9,6 +9,7 @@ export class HomeComponent {
   public books:Book[];
   emotions: Emotion[];
   emotionScore: EmotionScore[];
+  emotionRanking: EmotionRanking[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Book[]>(baseUrl + 'api/book/GetAllBooks').subscribe(result => {
@@ -19,6 +20,9 @@ export class HomeComponent {
     }, error => console.error(error));
     http.get<EmotionScore[]>(baseUrl + 'api/emotionscore/GetAllEmotionScores').subscribe(result => {
       this.emotionScore = result;
+    }, error => console.error(error));
+    http.get<EmotionRanking[]>(baseUrl + 'api/emotionranking/findBestRanking').subscribe(result => {      
+      this.emotionRanking = result;
     }, error => console.error(error));
   }
 }
@@ -41,4 +45,16 @@ interface EmotionScore {
   emotionid: number,
   bookid: number,
   score: number
+}
+
+interface EmotionRanking {
+  emotionscoreid: number;
+  emotionid: number;
+  bookid: number;
+  score: number;
+  emotion: string;
+  title: string;
+  author: string;
+  genreid: number;
+  pictureFilePath: string;
 }
