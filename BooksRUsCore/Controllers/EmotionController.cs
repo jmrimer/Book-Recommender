@@ -20,9 +20,9 @@ namespace BooksRUsCore.Controllers
         public List<Emotion> GetAllEmotions()
         {
             string connString = @"Server=db550.cecsresearch.org;Port=3306;Database=booksrus;Uid=svc_booksrus;Pwd=7FB*@H4pSKA)e&X(ga.;";
-            IBLLFactory emotionBLL = new BLLFactory(connString);
-            var emotions = emotionBLL.emotionBLL;
-            return emotions.selectAllGenre();
+            IBLLFactory bllFactory = new BLLFactory(connString);
+            var emotions = bllFactory.emotionBLL;
+            return emotions.selectAllEmotions();
         }
     }
 }
