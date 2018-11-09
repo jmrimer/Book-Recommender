@@ -15,7 +15,7 @@ export class HomeComponent {
     http.get<Book[]>(baseUrl + 'api/book/GetAllBooks').subscribe(result => {
       this.books = result;
     }, error => console.error(error));
-    http.get<Emotion[]>(baseUrl + 'api/e/GetAllEmotions').subscribe(result => {
+    http.get<Emotion[]>(baseUrl + 'api/emotion/GetAllEmotions').subscribe(result => {
       this.emotions= result;
     }, error => console.error(error));
     http.get<EmotionScore[]>(baseUrl + 'api/emotionscore/GetAllEmotionScores').subscribe(result => {

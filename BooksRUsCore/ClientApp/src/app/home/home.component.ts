@@ -1,5 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Emotion} from "../emotion";
+import {EmotionService} from "../emotion.service";
 
 @Component({
   selector: 'app-home',
@@ -7,20 +9,16 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @Input() emotions: Emotion[] = [
-    {emotionId: 1, emotion: 'happiness'},
-    {emotionId: 2, emotion: 'fear'},
-  ];
+  @Input() emotions: Emotion[];
 
-  constructor() {
+  constructor(private emotionService: EmotionService) {
   }
 
   ngOnInit() {
+    this.getEmotions();
   }
 
-}
-
-interface Emotion {
-  emotionId: number;
-  emotion: string;
+  getEmotions(): void {
+    this.emotionService.getEmotions().subscribe(emotions => this.emotions = emotions);
+  }
 }

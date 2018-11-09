@@ -4,14 +4,20 @@ import {HomeComponent} from './home.component';
 import {By} from "@angular/platform-browser";
 import {RecommendationComponent} from "../recommendation/recommendation.component";
 import {BookComponent} from "../book/book.component";
+import {EmotionService} from "../emotion.service";
+import {Observable} from "rxjs";
 
 describe('HomeComponent', () => {
+  let emotionService: EmotionService;
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async(() => {
+    emotionService = new EmotionService();
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, RecommendationComponent, BookComponent]
+      declarations: [HomeComponent, RecommendationComponent, BookComponent],
+      providers: [{provide: EmotionService, useValue: emotionService}]
+
     })
       .compileComponents();
   }));
@@ -19,11 +25,6 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    component.emotions = [
-      {emotionId: 1, emotion: 'emotion1'},
-      {emotionId: 2, emotion: 'emotion2'},
-      {emotionId: 3, emotion: 'emotion3'}
-    ];
     fixture.detectChanges();
   });
 
@@ -31,11 +32,14 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display a recommendation component', function () {
-    expect(fixture.debugElement.query(By.directive(RecommendationComponent))).toBeTruthy();
+  it('should display a recommendation for each emotion', function () {
+    expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(3);
   });
 
-  it('should display a recommendation for each e', function () {
-    expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(3);
+  it('should retrieve emotions from its service on initialization', function () {
+    spyOn(emotionService, 'getEmotions').and.returnValue(Observable.of([{emotionid:1, emotion: 'emo1'}]));
+    component.ngOnInit();
+    expect(emotionService.getEmotions).toHaveBeenCalled();
+    expect(component.emotions).toEqual([{emotionid: 1, emotion: 'emo1'}]);
   });
 });
