@@ -27,16 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="BooksRUs.Model">
-      <HintPath>..\..\BooksRUs.Model\BooksRUs.Model\bin\Debug\BooksRUs.Model.dll</HintPath>
-    </Reference>
     <Reference Include="BooksRUs.Model.Core">
       <HintPath>..\..\BooksRUs.Model.Core\BooksRUs.Model.Core\bin\Debug\netcoreapp2.1\BooksRUs.Model.Core.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\NewFolder\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

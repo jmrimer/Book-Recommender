@@ -1,27 +1,2 @@
-<h1> Welcome to BooksRUs </h1>
-<h1>Example List</h1>
+<app-recommendation></app-recommendation>
 
-<p>This component demonstrates fetching data from the server.</p>
-
-<p *ngIf="!emotionRanking"><em>Loading...</em></p>
-
-<h2> Here are the top recommended books for each emotion: </h2>
-<table class='table'>
-<thead>
-  <tr>
-    <th>Emotion</th>
-    <th>Book</th>
-    <th> Book Image</th>
-  </tr>
-</thead>
-<tbody>
-  <tr *ngFor="let ranking of emotionRanking">
-    <td>{{ ranking.emotion}}</td>
-    <td>{{ ranking.title}}</td>
-    <td>{{ ranking.author}}</td>
-    <td>      <img style="width: 150px; height: 200px" [src]="ranking.pictureFilePath" />
-</td>
-
-  </tr>
-</tbody>
-</table>
