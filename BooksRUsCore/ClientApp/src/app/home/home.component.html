@@ -1,2 +1,11 @@
-<app-recommendation></app-recommendation>
-
+<div class="home">
+  <h1>Recommendations</h1>
+  <div class="recommendations">
+    <div *ngFor="let e of emotions">
+      <app-recommendation
+        type="{{e.emotion}}"
+        [book]=book
+      ></app-recommendation>
+    </div>
+  </div>
+</div>

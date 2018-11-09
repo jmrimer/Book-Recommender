@@ -8,17 +8,12 @@ describe('RecommendationComponent', () => {
   let component: RecommendationComponent;
   let fixture: ComponentFixture<RecommendationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ RecommendationComponent, BookComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
+    });
     fixture = TestBed.createComponent(RecommendationComponent);
     component = fixture.componentInstance;
-    component.type = 'Happiness';
     fixture.detectChanges();
   });
 

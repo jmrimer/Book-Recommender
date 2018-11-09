@@ -19,7 +19,7 @@ describe('BookComponent', () => {
     component = fixture.componentInstance;
     component.title = 'book title';
     component.author = 'book author';
-    component.coverPath = '/assets/cover.png';
+    component.coverPath = './assets/cover.png';
     fixture.detectChanges();
   });
 
