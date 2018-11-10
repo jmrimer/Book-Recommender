@@ -19,7 +19,8 @@ namespace BooksRUsCore.Controllers
         [HttpGet("[action]")]
         public List<Emotion> GetAllEmotions()
         {
-            string connString = @"Server=db550.cecsresearch.org;Port=3306;Database=booksrus;Uid=svc_booksrus;Pwd=7FB*@H4pSKA)e&X(ga.;";
+//            string connString = @"Server=db550.cecsresearch.org;Port=3306;Database=booksrus;Uid=svc_booksrus;Pwd=7FB*@H4pSKA)e&X(ga.;";
+            string connString = @"Server=127.0.0.1;Port=3306;Database=BooksRUs;Uid=root;";
             IBLLFactory bllFactory = new BLLFactory(connString);
             var emotions = bllFactory.emotionBLL;
             return emotions.selectAllEmotions();
