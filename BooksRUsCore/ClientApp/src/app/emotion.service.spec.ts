@@ -17,17 +17,4 @@ describe('EmotionService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('should return 3 emotions',
-    (done: DoneFn) => {
-      service.getEmotions().subscribe(emotions => {
-        expect(emotions).toEqual([
-          new Emotion(1, 'emotion1'),
-          new Emotion(2, 'emotion2'),
-          new Emotion(3, 'emotion3'),
-        ]);
-        done();
-      });
-    }
-  );
 });

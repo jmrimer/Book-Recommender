@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class EmotionService {
   private emotionsUrl = 'api/emotion/GetAllEmotions';
-  constructor(private http: HttpClient) {
+  constructor(private http?: HttpClient) {
   }
 
   getEmotions(): Observable<Emotion[]> {

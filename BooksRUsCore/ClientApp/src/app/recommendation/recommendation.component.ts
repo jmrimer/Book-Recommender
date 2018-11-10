@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Book} from "../book";
 
 @Component({
   selector: 'app-recommendation',
@@ -7,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class RecommendationComponent implements OnInit {
   @Input() type: string;
+  @Input() book: Book;
 
   constructor() { }
 
