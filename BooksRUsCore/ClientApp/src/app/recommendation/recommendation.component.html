@@ -1,5 +1,5 @@
-<div class="recommendation">
-  <h2 class="recommendation-header">{{recommendation.emotion.emotion}}</h2>
-  <app-book book={{recommendation.book}}>
-  </app-book>
-</div>
+  <div class="recommendation">
+    <h2 class="recommendation-header">{{recommendation.emotion.emotion}}</h2>
+    <app-book [book]="recommendation.book">
+    </app-book>
+  </div>

@@ -3,7 +3,7 @@
   <div class="recommendations">
     <div *ngFor="let r of recommendations">
       <app-recommendation
-        recommendation={{r}}
+        [recommendation]="r"
       ></app-recommendation>
     </div>
   </div>

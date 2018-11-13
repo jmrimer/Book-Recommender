@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Book} from "../book";
 import {Recommendation} from "./recommendation";
-import {Emotion} from "../emotion";
 
 @Component({
   selector: 'app-recommendation',

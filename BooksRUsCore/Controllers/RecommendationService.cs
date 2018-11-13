@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using BooksRUs.Model.Core;
 using BooksRUs.Model.Core.DTOs;
 
 namespace BooksRUsCore.Controllers
@@ -10,39 +11,50 @@ namespace BooksRUsCore.Controllers
         {
         }
 
-        public List<Recommendation> getHighestRecommendations(IQueryable<Emotion> emotions, IQueryable<EmotionScore> scores)
+        public List<Recommendation> getHighestRecommendations(
+            IQueryable<Emotion> emotions,
+            IQueryable<Book> books,
+            IQueryable<EmotionScore> scores
+        )
         {
+            var emotionList = emotions.ToList();
+            var scoreList = scores.ToList();
+            var bookList = books.ToList();
+
             var recommendations = new List<Recommendation>();
             var bestScores = new List<EmotionScore>();
-            
-            foreach (EmotionScore score in scores)
+            bool found = false;
+
+            foreach (EmotionScore score in scoreList)
             {
-                foreach (Emotion emotion in emotions)
+                foreach (EmotionScore bestScore in bestScores)
                 {
-                    // collect all into emotion
-                    
-                    // if the emotions is in, compare it
-                    
-                        // if greater, replace
-                    // else add it
+                    if (bestScore.emotionid == score.emotionid)
+                    {
+                        found = true;
+                        if (score.score > bestScore.score)
+                        {
+                            bestScores.Add(score);
+                            bestScores.Remove(bestScore);
+                            break;
+                        }
+                    }
                 }
+
+                if (!found) { bestScores.Add(score); }
+
+                found = false;
             }
-            
-//            string connString = @"Server=db550.cecsresearch.org;Port=3306;Database=booksrus;Uid=svc_booksrus;Pwd=7FB*@H4pSKA)e&X(ga.;";
-//            IBLLFactory emotionRankingBLL = new BLLFactory(connString);
-//            List<string> seenEmotions = new List<string>();
-//            List<EmotionRanking> bestRankings = new List<EmotionRanking>();
-//            var emotionRanking = emotionRankingBLL.emotionRankingBLL;
-//            var rankings = emotionRanking.findBestRankings();
-//            foreach (EmotionRanking rank in rankings)
-//            {
-//                if (!seenEmotions.Contains(rank.emotion))
-//                {
-//                    seenEmotions.Add(rank.emotion);
-//                    bestRankings.Add(rank);
-//                }
-//            }
-//            return bestRankings;
+
+            foreach (EmotionScore score in bestScores)
+            {
+                recommendations.Add(new Recommendation
+                {
+                    emotion = emotionList.Find(emotion => emotion.emotionid == score.emotionid),
+                    book = bookList.Find(book => book.bookid == score.bookid)
+                });
+            }
+
             return recommendations;
         }
     }
