@@ -25,12 +25,12 @@ namespace BooksRUsCore
         {
             if (CurrentEnvironment.IsEnvironment("Testing"))
             {
-                services.AddDbContext<EmotionContext>(options =>
+                services.AddDbContext<BooksRUsDBContext>(options =>
                     options.UseInMemoryDatabase("TestingDB"));
             }
             else
             {
-                services.AddDbContext<EmotionContext>(options =>
+                services.AddDbContext<BooksRUsDBContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             }
 

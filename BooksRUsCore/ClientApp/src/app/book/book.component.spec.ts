@@ -2,24 +2,23 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookComponent } from './book.component';
 import {By} from "@angular/platform-browser";
+import {Book} from "../book";
 
 describe('BookComponent', () => {
   let component: BookComponent;
   let fixture: ComponentFixture<BookComponent>;
+  let book: Book;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
+    book = new Book('book title', 'book author', './assets/cover.png');
+
     TestBed.configureTestingModule({
       declarations: [ BookComponent ]
     })
     .compileComponents();
-  }));
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(BookComponent);
     component = fixture.componentInstance;
-    component.title = 'book title';
-    component.author = 'book author';
-    component.coverPath = './assets/cover.png';
+    component.book = book;
     fixture.detectChanges();
   });
 
