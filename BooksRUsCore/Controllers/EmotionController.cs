@@ -8,9 +8,9 @@ namespace BooksRUsCore.Controllers
     [Route("api/[controller]")]
     public class EmotionController : Controller
     {
-        private readonly EmotionContext _context;
+        private readonly BooksRUsDBContext _context;
 
-        public EmotionController(EmotionContext context)
+        public EmotionController(BooksRUsDBContext context)
         {
             _context = context;
         }

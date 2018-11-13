@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Book} from "../book";
+import {Recommendation} from "./recommendation";
+import {Emotion} from "../emotion";
 
 @Component({
   selector: 'app-recommendation',
@@ -7,8 +9,7 @@ import {Book} from "../book";
   styleUrls: ['./recommendation.component.css']
 })
 export class RecommendationComponent implements OnInit {
-  @Input() type: string;
-  @Input() book: Book;
+  @Input() recommendation: Recommendation;
 
   constructor() { }
 

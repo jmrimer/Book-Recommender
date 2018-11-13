@@ -1,4 +1,5 @@
 <div class="recommendation">
-  <h2 class="recommendation-header">{{type}}</h2>
-  <app-book title={{book.title}} author={{book.author}} coverPath={{book.pictureFilePath}}></app-book>
+  <h2 class="recommendation-header">{{recommendation.emotion.emotion}}</h2>
+  <app-book book={{recommendation.book}}>
+  </app-book>
 </div>

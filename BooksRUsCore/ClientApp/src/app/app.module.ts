@@ -9,6 +9,7 @@ import {HomeComponent} from './home/home.component';
 import {RecommendationComponent} from "./recommendation/recommendation.component";
 import {BookComponent} from "./book/book.component";
 import {EmotionService} from "./emotion.service";
+import {RecommendationService} from "./recommendation/recommendation.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {EmotionService} from "./emotion.service";
       {path: '', component: HomeComponent, pathMatch: 'full'},
     ]),
   ],
-  providers: [EmotionService],
+  providers: [RecommendationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Emotion} from "../emotion";
 import {EmotionService} from "../emotion.service";
 import {Book} from "../book";
+import {Recommendation} from "../recommendation/recommendation";
+import {RecommendationService} from "../recommendation/recommendation.service";
 
 @Component({
   selector: 'app-home',
@@ -10,17 +12,18 @@ import {Book} from "../book";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @Input() emotions: Emotion[];
-  book: Book = new Book('title', 'author', '../assets/hitchhiker.png');
+  recommendations: Recommendation[];
 
-  constructor(private emotionService: EmotionService) {
+  constructor(private recommendationService: RecommendationService) {
   }
 
   ngOnInit() {
-    this.getEmotions();
+    this.getRecommendations();
   }
 
-  getEmotions(): void {
-    this.emotionService.getEmotions().subscribe(emotions => this.emotions = emotions);
+  getRecommendations(): void {
+    this.recommendationService.getRecommendations().subscribe(
+      recommendations => this.recommendations = recommendations
+    );
   }
 }
