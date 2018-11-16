@@ -18,9 +18,13 @@ export class VoteContainerComponent implements OnInit {
   }
 
   getBooks(): void {
-    this.bookService.getBooks().subscribe((books) => {
-        this.books = books;
-      }, (err) => {console.log(err);}
-    );
+    if (!this.books) {
+      this.bookService.getBooks().subscribe((books) => {
+          this.books = books;
+        }, (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 }

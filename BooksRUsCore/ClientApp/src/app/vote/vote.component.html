@@ -2,5 +2,8 @@
   <ng-container *ngIf="book">
     <app-book [book]="book"></app-book>
   </ng-container>
-  <button class="next-book">Next book</button>
+  <button
+    class="next-book"
+    (click)="nextBook()"
+  >Next book</button>
 </div>

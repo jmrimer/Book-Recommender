@@ -1,0 +1,15 @@
+.vote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  font-family: 'Poor Story';
+  font-size: 36px;
+  line-height: 45px;
+  align: center;
+  height: 52px;
+  width: 190px;
+  border-radius: 15px;
+}
