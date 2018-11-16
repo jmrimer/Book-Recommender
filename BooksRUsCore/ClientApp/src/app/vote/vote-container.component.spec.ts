@@ -5,8 +5,8 @@ import {VoteComponent} from "./vote.component";
 import {By} from "@angular/platform-browser";
 import {BookComponent} from "../book/book.component";
 import {Book} from "../book/book";
-import {Observable} from "rxjs";
 import {BookService} from "../book/book.service";
+import {Observable} from "rxjs";
 
 describe('VoteContainerComponent', () => {
   let books: Book[];
@@ -22,25 +22,20 @@ describe('VoteContainerComponent', () => {
     ];
 
     bookServiceStub = {
-      test: () => {
-        console.log('testing');},
       getBooks: () => {
         return Observable.of(books);
       }
     };
-    console.log(bookServiceStub);
+
     TestBed.configureTestingModule({
       declarations: [VoteContainerComponent, VoteComponent, BookComponent],
       providers: [
-        {provide: BookService, userValue: bookServiceStub}
+        {provide: BookService, useValue: bookServiceStub}
       ]
-    }).compileComponents();
+    });
     fixture = TestBed.createComponent(VoteContainerComponent);
     component = fixture.componentInstance;
   }));
-
-  beforeEach(function () {
-  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -48,7 +43,7 @@ describe('VoteContainerComponent', () => {
 
   it('should display a vote page', function () {
     expect(fixture.debugElement.query(By.directive(VoteComponent))).toBeFalsy();
-    component.books = [new Book('1','2','3')];
+    component.books = books;
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.directive(VoteComponent))).toBeTruthy();
   });

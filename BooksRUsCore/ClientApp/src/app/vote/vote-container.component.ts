@@ -14,16 +14,13 @@ export class VoteContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("------------");
     this.getBooks();
   }
 
   getBooks(): void {
-    console.log("=============");
-    this.bookService.test();
-    // this.bookService.getBooks().subscribe((books) => {
-    //     this.books = books;
-    //   }, (err) => {console.log(err);}
-    // );
+    this.bookService.getBooks().subscribe((books) => {
+        this.books = books;
+      }, (err) => {console.log(err);}
+    );
   }
 }

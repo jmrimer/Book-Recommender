@@ -32,7 +32,6 @@ describe('HomeComponent', () => {
 
     recommendationServiceStub = {
       getRecommendations: () => {
-        console.log("-----");
         return Observable.of(recommendations);
       }
     };
@@ -56,9 +55,8 @@ describe('HomeComponent', () => {
   });
 
   it('should display a recommendation for each recommendation', function () {
-    component.recommendations = [new Recommendation(emotion1,book1), new Recommendation(emotion2, book2)];
     fixture.detectChanges();
-    expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(2);
+    expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(3);
   });
 
   it('should retrieve emotion rankings from its service on initialization', function () {
