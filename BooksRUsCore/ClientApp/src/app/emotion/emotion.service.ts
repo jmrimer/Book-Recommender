@@ -1,7 +1,6 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Emotion} from "./emotion";
-import {Observable} from "rxjs";
-import {of} from "rxjs/observable/of";
+import {Observable} from "rxjs/Rx";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable()

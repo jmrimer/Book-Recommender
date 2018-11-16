@@ -8,15 +8,19 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {RecommendationComponent} from "./recommendation/recommendation.component";
 import {BookComponent} from "./book/book.component";
-import {EmotionService} from "./emotion.service";
 import {RecommendationService} from "./recommendation/recommendation.service";
+import {VoteComponent} from './vote/vote.component';
+import {VoteContainerComponent} from "./vote/vote-container.component";
+import {BookService} from "./book/book.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RecommendationComponent,
-    BookComponent
+    BookComponent,
+    VoteComponent,
+    VoteContainerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -24,9 +28,10 @@ import {RecommendationService} from "./recommendation/recommendation.service";
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'vote', component: VoteContainerComponent, pathMatch: 'full'},
     ]),
   ],
-  providers: [RecommendationService],
+  providers: [RecommendationService, BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

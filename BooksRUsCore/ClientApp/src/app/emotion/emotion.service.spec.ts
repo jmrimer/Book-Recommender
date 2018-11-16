@@ -1,7 +1,5 @@
-import {TestBed, inject} from '@angular/core/testing';
-
-import {EmotionService} from './emotion.service';
-import {Emotion} from "./emotion";
+import {TestBed} from "@angular/core/testing";
+import {EmotionService} from "./emotion.service";
 import {HttpClient, HttpHandler} from "@angular/common/http";
 
 describe('EmotionService', () => {

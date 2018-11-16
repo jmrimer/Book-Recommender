@@ -1,11 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RecommendationComponent} from './recommendation.component';
 import {By} from "@angular/platform-browser";
 import {BookComponent} from "../book/book.component";
 import {Recommendation} from "./recommendation";
-import {Emotion} from "../emotion";
-import {Book} from "../book";
+import {Emotion} from "../emotion/emotion";
+import {Book} from "../book/book";
 
 describe('RecommendationComponent', () => {
   let component: RecommendationComponent;
@@ -19,7 +19,7 @@ describe('RecommendationComponent', () => {
     );
 
     TestBed.configureTestingModule({
-      declarations: [RecommendationComponent, BookComponent]
+      declarations: [RecommendationComponent, BookComponent],
     });
     fixture = TestBed.createComponent(RecommendationComponent);
     component = fixture.componentInstance;

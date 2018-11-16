@@ -5,11 +5,10 @@ import {By} from "@angular/platform-browser";
 import {RecommendationComponent} from "../recommendation/recommendation.component";
 import {BookComponent} from "../book/book.component";
 import {Observable} from "rxjs";
-import {Emotion} from "../emotion";
-import {Book} from "../book";
+import {Emotion} from "../emotion/emotion";
 import {Recommendation} from "../recommendation/recommendation";
 import {RecommendationService} from "../recommendation/recommendation.service";
-import {Fix} from "tslint";
+import {Book} from "../book/book";
 
 describe('HomeComponent', () => {
   let recommendationServiceStub: Partial<RecommendationService>;
@@ -19,21 +18,12 @@ describe('HomeComponent', () => {
   let emotion1: Emotion = new Emotion(1, 'emo1');
   let emotion2: Emotion = new Emotion(2, 'emo2');
   let emotion3: Emotion = new Emotion(3, 'emo3');
-  let book1: Book = new Book('title1', 'author1', 1, 1, 'cover1', 'desc');
-  let book2: Book = new Book('title2', 'author2', 2, 2, 'cover2', 'desc');
-  let book3: Book = new Book('title3', 'author3', 3, 3, 'cover3', 'desc');
+  let book1: Book = new Book('title1', 'author1', 'cover1');
+  let book2: Book = new Book('title2', 'author2', 'cover2');
+  let book3: Book = new Book('title3', 'author3', 'cover3');
   let recommendations: Recommendation[];
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [HomeComponent, RecommendationComponent, BookComponent],
-      providers: [
-        {provide: RecommendationService, useValue: recommendationServiceStub}
-      ]
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
     recommendations = [
       new Recommendation(emotion1, book1),
       new Recommendation(emotion2, book2),
@@ -46,10 +36,15 @@ describe('HomeComponent', () => {
       }
     };
 
+    TestBed.configureTestingModule({
+      declarations: [HomeComponent, RecommendationComponent, BookComponent],
+      providers: [
+        {provide: RecommendationService, useValue: recommendationServiceStub}
+      ]
+    });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    component.recommendations = [new Recommendation(emotion1, book1)];
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -60,7 +55,6 @@ describe('HomeComponent', () => {
   });
 
   it('should display a recommendation for each recommendation', function () {
-    component.recommendations = recommendations;
     fixture.detectChanges();
     expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(3);
   });
