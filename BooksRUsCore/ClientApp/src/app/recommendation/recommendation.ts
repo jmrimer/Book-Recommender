@@ -1,5 +1,5 @@
-import {Emotion} from "../emotion";
-import {Book} from "../book";
+import {Emotion} from "../emotion/emotion";
+import {Book} from "../book/book";
 
 export class Recommendation {
   private _emotion: Emotion;
