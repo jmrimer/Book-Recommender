@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   getRecommendations(): void {
-    this.recommendationService.getRecommendations().subscribe( (recommendations) => {
+    this.recommendationService.getRecommendations().subscribe((recommendations) => {
       this.recommendations = recommendations;
       }, (err) => {console.log(err);}
     );

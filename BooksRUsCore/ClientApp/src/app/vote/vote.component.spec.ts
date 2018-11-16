@@ -32,4 +32,8 @@ describe('VoteComponent', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.directive(BookComponent))).toBeTruthy();
   });
+
+  it('should have a next book button', function () {
+    expect(fixture.debugElement.query(By.css('button')).nativeElement.textContent).toBe('Next book');
+  });
 });

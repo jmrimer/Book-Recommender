@@ -24,15 +24,6 @@ describe('HomeComponent', () => {
   let recommendations: Recommendation[];
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [HomeComponent, RecommendationComponent, BookComponent],
-      providers: [
-        {provide: RecommendationService, useValue: recommendationServiceStub}
-      ]
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
     recommendations = [
       new Recommendation(emotion1, book1),
       new Recommendation(emotion2, book2),
@@ -41,14 +32,20 @@ describe('HomeComponent', () => {
 
     recommendationServiceStub = {
       getRecommendations: () => {
+        console.log("-----");
         return Observable.of(recommendations);
       }
     };
 
+    TestBed.configureTestingModule({
+      declarations: [HomeComponent, RecommendationComponent, BookComponent],
+      providers: [
+        {provide: RecommendationService, useValue: recommendationServiceStub}
+      ]
+    });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    component.recommendations = [new Recommendation(emotion1, book1)];
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -59,9 +56,9 @@ describe('HomeComponent', () => {
   });
 
   it('should display a recommendation for each recommendation', function () {
-    component.recommendations = recommendations;
+    component.recommendations = [new Recommendation(emotion1,book1), new Recommendation(emotion2, book2)];
     fixture.detectChanges();
-    expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(3);
+    expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(2);
   });
 
   it('should retrieve emotion rankings from its service on initialization', function () {

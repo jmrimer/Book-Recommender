@@ -19,7 +19,7 @@ describe('RecommendationComponent', () => {
     );
 
     TestBed.configureTestingModule({
-      declarations: [RecommendationComponent, BookComponent]
+      declarations: [RecommendationComponent, BookComponent],
     });
     fixture = TestBed.createComponent(RecommendationComponent);
     component = fixture.componentInstance;

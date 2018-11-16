@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using BooksRUs.Model;
-using BooksRUs.Model.Core.Contracts;
+﻿using System.Linq;
 using BooksRUs.Model.Core;
-using BooksRUs.Model.Core.Contracts.Helpers;
-using BooksRUs.Model.Core.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BooksRUsCore.Controllers
 {
     [Route("api/[controller]")]
     public class BookController : Controller
     {
-        [HttpGet("[action]")]
-        public List<Book> GetAllBooks()
+        private readonly BooksRUsDBContext _context;
+
+        public BookController(BooksRUsDBContext context)
         {
-            string connString = @"Server=db550.cecsresearch.org;Port=3306;Database=booksrus;Uid=svc_booksrus;Pwd=7FB*@H4pSKA)e&X(ga.;";
-            IBLLFactory bookBll = new BLLFactory(connString);
-            var book = bookBll.bookBLL;
-            IListToJsonString json = new ListToJsonString();
-            return book.selectAllBook();            
+            _context = context;
+        }
+
+        [HttpGet("[action]")]
+        public IQueryable<Book> GetAllBooks()
+        {
+            var books = _context.Set<Book>();
+            return books;
         }
     }
 }
