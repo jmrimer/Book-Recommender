@@ -21,7 +21,8 @@ export class HomeComponent {
     http.get<EmotionScore[]>(baseUrl + 'api/emotionscore/GetAllEmotionScores').subscribe(result => {
       this.emotionScore = result;
     }, error => console.error(error));
-    http.get<EmotionRanking[]>(baseUrl + 'api/emotionranking/findBestRanking').subscribe(result => {      
+    http.get<EmotionRanking[]>(baseUrl + 'api/emotionranking/findBestRanking').subscribe(result => {
+      console.log(result);
       this.emotionRanking = result;
     }, error => console.error(error));
   }
