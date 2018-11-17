@@ -1,61 +1,26 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {Recommendation} from "../recommendation/recommendation";
+import {RecommendationService} from "../recommendation/recommendation.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  public books:Book[];
-  emotions: Emotion[];
-  emotionScore: EmotionScore[];
-  emotionRanking: EmotionRanking[];
+export class HomeComponent implements OnInit {
+  recommendations: Recommendation[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Book[]>(baseUrl + 'api/book/GetAllBooks').subscribe(result => {
-      this.books = result;
-    }, error => console.error(error));
-    http.get<Emotion[]>(baseUrl + 'api/emotion/GetAllEmotions').subscribe(result => {
-      this.emotions= result;
-    }, error => console.error(error));
-    http.get<EmotionScore[]>(baseUrl + 'api/emotionscore/GetAllEmotionScores').subscribe(result => {
-      this.emotionScore = result;
-    }, error => console.error(error));
-    http.get<EmotionRanking[]>(baseUrl + 'api/emotionranking/findBestRanking').subscribe(result => {
-      console.log(result);
-      this.emotionRanking = result;
-    }, error => console.error(error));
+  constructor(private recommendationService: RecommendationService) {
   }
-}
 
-interface Book {
-  title: string;
-  author: string;
-  bookid: number;
-  genreid: number;
-  pictureFilePath: string;
-}
+  ngOnInit() {
+    this.getRecommendations();
+  }
 
-interface Emotion {
-  emotionid: number;
-  emotion: string;
-}
-
-interface EmotionScore {
-  emotionscoreid: number,
-  emotionid: number,
-  bookid: number,
-  score: number
-}
-
-interface EmotionRanking {
-  emotionscoreid: number;
-  emotionid: number;
-  bookid: number;
-  score: number;
-  emotion: string;
-  title: string;
-  author: string;
-  genreid: number;
-  pictureFilePath: string;
+  getRecommendations(): void {
+    this.recommendationService.getRecommendations().subscribe((recommendations) => {
+      this.recommendations = recommendations;
+      }, (err) => {console.log(err);}
+    );
+  }
 }
