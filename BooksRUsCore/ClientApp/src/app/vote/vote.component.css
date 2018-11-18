@@ -1,6 +1,6 @@
 .vote {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -12,4 +12,20 @@ button {
   height: 52px;
   width: 190px;
   border-radius: 15px;
+}
+
+.instructions {
+  font-family: Roboto;
+  font-size: 36px;
+}
+
+.voting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.voting > .emotions {
+  font-family: 'Poor Story';
+  font-size: 36px;
 }

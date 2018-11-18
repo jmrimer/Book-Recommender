@@ -13,12 +13,12 @@ using Xunit;
 
 namespace Tests
 {
-    public class BookTest
+    public class BookControllerTest
     {
         private readonly BooksRUsDBContext _context;
         private readonly HttpClient _client;
 
-        public BookTest()
+        public BookControllerTest()
         {
             var builder = new WebHostBuilder()
                 .UseEnvironment("Testing")

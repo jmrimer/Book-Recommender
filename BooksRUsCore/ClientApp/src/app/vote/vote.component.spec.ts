@@ -43,7 +43,7 @@ describe('VoteComponent', () => {
   });
 
   it('should have a next book button', function () {
-    expect(fixture.debugElement.query(By.css('button')).nativeElement.textContent).toBe('Next');
+    expect(fixture.debugElement.query(By.css('.next-book')).nativeElement.textContent).toBe('Next');
   });
 
   it('should trigger the inject function on button click', function () {
@@ -57,5 +57,49 @@ describe('VoteComponent', () => {
     component.emotions = emotions;
     fixture.detectChanges();
     expect(fixture.debugElement.queryAll(By.css('.emotion-selection')).length).toBe(2);
+  });
+
+  it('should add an emotion to emotions when selected', function () {
+    expect(component.selectedEmotions.length).toBe(0);
+    component.emotions = emotions;
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('.emotion-selection')).nativeElement.click();
+    expect(component.selectedEmotions.length).toBe(1);
+  });
+
+  it('should remove an emotion from emotions when unselected', function () {
+    component.emotions = emotions;
+    component.selectedEmotions = [emotions[0]];
+    fixture.detectChanges();
+    expect(component.selectedEmotions.length).toBe(1);
+    fixture.debugElement.queryAll(By.css(`.emotion-selection`))[0].nativeElement.click();
+    expect(component.selectedEmotions.length).toBe(0);
+  });
+
+  it('should handle select adds or removes from emotion score array', function () {
+    let emo1 = new Emotion(1, '1');
+    let emo2 = new Emotion(2, '2');
+    let emos = [emo1, emo2];
+    component.selectedEmotions = emos;
+    expect(component.selectedEmotions).toEqual(emos);
+    component.selectEmotion(emo1);
+    expect(component.selectedEmotions.length).toEqual(1);
+    component.selectEmotion(emo1);
+    expect(component.selectedEmotions).toEqual(emos);
+    expect(component.selectedEmotions.length).toEqual(2);
+  });
+
+  it('should trigger its inject submit function on submit button click', function () {
+    let clickSpy = jasmine.createSpy();
+    component.submitVotes = clickSpy;
+    fixture.debugElement.query(By.css('.vote-button')).nativeElement.click();
+    expect(clickSpy).toHaveBeenCalled();
+  });
+
+  it('should have instructions', function () {
+    component.emotions = emotions;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.instructions')).nativeElement.textContent)
+      .toBe('Which emotions best represent this book?');
   });
 });

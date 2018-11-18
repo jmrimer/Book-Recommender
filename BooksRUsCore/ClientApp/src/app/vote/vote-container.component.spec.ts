@@ -9,21 +9,26 @@ import {BookService} from "../book/book.service";
 import {Observable} from "rxjs";
 import {Emotion} from "../emotion/emotion";
 import {EmotionService} from "../emotion/emotion.service";
+import {Vote} from "./Vote";
+import {VoteService} from "./vote.service";
 
 describe('VoteContainerComponent', () => {
+  let book1, book2, book3: Book;
   let books: Book[];
   let bookServiceStub: Partial<BookService>;
   let emotions: Emotion[];
+  let emotion1, emotion2: Emotion;
   let emotionServiceStub: Partial<EmotionService>;
+  let voteServiceStub: Partial<VoteService>;
   let component: VoteContainerComponent;
   let fixture: ComponentFixture<VoteContainerComponent>;
+  let submitVotesSpy: any;
 
   beforeEach(async(() => {
-    books = [
-      new Book('t1', 'a1', 'p1'),
-      new Book('t2', 'a2', 'p2'),
-      new Book('t3', 'a3', 'p3'),
-    ];
+    let book1 = new Book('t1', 'a1', 'p1');
+    let book2 = new Book('t2', 'a2', 'p2');
+    let book3 = new Book('t3', 'a3', 'p3');
+    books = [book1, book2, book3];
 
     bookServiceStub = {
       getBooks: () => {
@@ -31,10 +36,9 @@ describe('VoteContainerComponent', () => {
       }
     };
 
-    emotions = [
-      new Emotion(1, 'emo1'),
-      new Emotion(2, 'emo2')
-    ];
+    emotion1 = new Emotion(1, 'emo1');
+    emotion2 = new Emotion(2, 'emo2');
+    emotions = [emotion1, emotion2];
 
     emotionServiceStub = {
       getEmotions: () => {
@@ -42,11 +46,20 @@ describe('VoteContainerComponent', () => {
       }
     };
 
+    voteServiceStub = {
+      submitVotes: () => {
+      }
+    };
+    submitVotesSpy = jasmine.createSpy();
+    voteServiceStub.submitVotes = submitVotesSpy;
+
+
     TestBed.configureTestingModule({
       declarations: [VoteContainerComponent, VoteComponent, BookComponent],
       providers: [
         {provide: BookService, useValue: bookServiceStub},
         {provide: EmotionService, useValue: emotionServiceStub},
+        {provide: VoteService, useValue: voteServiceStub}
       ]
     });
     fixture = TestBed.createComponent(VoteContainerComponent);
@@ -74,7 +87,7 @@ describe('VoteContainerComponent', () => {
     expect(component.book).toEqual(books[1]);
   });
 
-  it('should restart books at end', function () {
+  it('should restart the next books at end of the book list', function () {
     component.ngOnInit();
     expect(component.book).toEqual(books[0]);
     component.nextBook();
@@ -86,5 +99,11 @@ describe('VoteContainerComponent', () => {
   it('should get all the emotions on initialization', function () {
     fixture.detectChanges();
     expect(component.emotions).toEqual(emotions);
+  });
+
+  it('should send votes to the votes service', function () {
+    const votes = [new Vote(book1, emotion1), new Vote(book1, emotion2)];
+    component.submitVotes(votes);
+    expect(voteServiceStub.submitVotes).toHaveBeenCalledWith(votes);
   });
 });

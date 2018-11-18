@@ -13,6 +13,7 @@ import {VoteComponent} from './vote/vote.component';
 import {VoteContainerComponent} from "./vote/vote-container.component";
 import {BookService} from "./book/book.service";
 import {EmotionService} from "./emotion/emotion.service";
+import {VoteService} from "./vote/vote.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {EmotionService} from "./emotion/emotion.service";
       {path: 'vote', component: VoteContainerComponent, pathMatch: 'full'},
     ]),
   ],
-  providers: [RecommendationService, BookService, EmotionService],
+  providers: [RecommendationService, BookService, EmotionService, VoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
