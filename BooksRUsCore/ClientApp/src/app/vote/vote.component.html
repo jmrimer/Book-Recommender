@@ -6,6 +6,7 @@
         class="emotion-selection"
         value="{{emotion.emotionid}}"
         type="checkbox"
+        (click)="selectEmotion(emotion)"
       />
       <label for="{{emotion.emotionid}}">{{emotion.emotion}}</label>
       <br/>
