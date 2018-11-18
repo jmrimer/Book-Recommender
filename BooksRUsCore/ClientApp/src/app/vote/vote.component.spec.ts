@@ -76,7 +76,7 @@ describe('VoteComponent', () => {
     expect(component.selectedEmotions.length).toBe(0);
   });
 
-  it('should handle select adds or removes', function () {
+  it('should handle select adds or removes from emotion score array', function () {
     let emo1 = new Emotion(1, '1');
     let emo2 = new Emotion(2, '2');
     let emos = [emo1, emo2];
@@ -89,10 +89,10 @@ describe('VoteComponent', () => {
     expect(component.selectedEmotions.length).toEqual(2);
   });
 
-  // it('should trigger its inject submit function on submit button click', function () {
-  //   let clickSpy = jasmine.createSpy();
-  //   component.nextBook = clickSpy;
-  //   fixture.debugElement.query(By.css('.submit-button')).nativeElement.click();
-  //   expect(clickSpy).toHaveBeenCalled();
-  // });
+  it('should trigger its inject submit function on submit button click', function () {
+    let clickSpy = jasmine.createSpy();
+    component.submitScores = clickSpy;
+    fixture.debugElement.query(By.css('.vote-button')).nativeElement.click();
+    expect(clickSpy).toHaveBeenCalled();
+  });
 });

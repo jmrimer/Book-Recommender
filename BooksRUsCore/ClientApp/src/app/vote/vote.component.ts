@@ -31,7 +31,7 @@ export class VoteComponent implements OnInit {
       this.selectedEmotions.push(emotion);
     }
   }
-  // submitEmotions(emotionScores: EmotionScore[]) {
-  //   this.emotionScoresEmitter.emit(emotionScores);
-  // }
+
+  submitScores() {
+  }
 }

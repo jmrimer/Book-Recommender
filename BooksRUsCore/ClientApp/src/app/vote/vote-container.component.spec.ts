@@ -74,7 +74,7 @@ describe('VoteContainerComponent', () => {
     expect(component.book).toEqual(books[1]);
   });
 
-  it('should restart books at end', function () {
+  it('should restart the next books at end of the book list', function () {
     component.ngOnInit();
     expect(component.book).toEqual(books[0]);
     component.nextBook();
@@ -86,5 +86,22 @@ describe('VoteContainerComponent', () => {
   it('should get all the emotions on initialization', function () {
     fixture.detectChanges();
     expect(component.emotions).toEqual(emotions);
+  });
+
+  it('should send an emotion scores set to the emotion scores service', function (){
+    // setup
+    // emotionScore + 1
+    const emotionScores = [
+      {emotion1, book},
+      {emotion2, book}
+    ]
+    component.submitScores(emotionScores);
+    spy = emotionScoresServiceStub.postScores;
+    expect(spy).toHaveBeenCalledWith(emotionScores);
+      // submit it
+      // stub a service call as a response to the submission
+    // test
+      // expect(vote to have been sent to service)
+    expect(false).toBeTruthy();
   });
 });
