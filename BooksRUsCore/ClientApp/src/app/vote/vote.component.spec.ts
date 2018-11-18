@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VoteComponent } from './vote.component';
+import {VoteComponent} from './vote.component';
 import {BookComponent} from "../book/book.component";
 import {By} from "@angular/platform-browser";
 import {Book} from "../book/book";
@@ -8,19 +8,15 @@ import {Book} from "../book/book";
 describe('VoteComponent', () => {
   let component: VoteComponent;
   let fixture: ComponentFixture<VoteComponent>;
-  let books: Book[];
+  let book: Book;
 
   beforeEach(async(() => {
-    books = [
-      new Book('t1', 'a1', 'p1'),
-      new Book('t2', 'a2', 'p2'),
-      new Book('t3', 'a3', 'p3'),
-    ];
+    book = new Book('t1', 'a1', 'p1');
 
     TestBed.configureTestingModule({
-      declarations: [ VoteComponent, BookComponent ]
+      declarations: [VoteComponent, BookComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,39 +31,20 @@ describe('VoteComponent', () => {
 
   it('should display a book if available', function () {
     expect(fixture.debugElement.query(By.directive(BookComponent))).toBeFalsy();
-    component.books = books;
+    component.book = book;
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.directive(BookComponent))).toBeTruthy();
   });
 
   it('should have a next book button', function () {
-    expect(fixture.debugElement.query(By.css('button')).nativeElement.textContent).toBe('Next book');
+    expect(fixture.debugElement.query(By.css('button')).nativeElement.textContent).toBe('Next');
   });
 
-  it('should call the next book click function on button click', function () {
-    component.books = books;
-    component.setBook();
-    const index = component.books.indexOf(component.book);
+  it('should trigger the inject function on button click', function () {
+    let clickSpy = jasmine.createSpy();
+    component.nextBook = clickSpy;
     fixture.debugElement.query(By.css('button')).nativeElement.click();
-    expect(component.books.indexOf(component.book)).not.toEqual(index);
-  });
-
-  it('should move to the next book', function () {
-    component.books = books;
-    component.ngOnInit();
-    expect(component.book).toEqual(books[0]);
-    component.nextBook();
-    expect(component.book).toEqual(books[1]);
-  });
-
-  it('should restart books at end', function () {
-    component.books = books;
-    component.ngOnInit();
-    expect(component.book).toEqual(books[0]);
-    component.nextBook();
-    component.nextBook();
-    component.nextBook();
-    expect(component.book).toEqual(books[0]);
+    expect(clickSpy).toHaveBeenCalled();
   });
 
 });

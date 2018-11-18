@@ -52,4 +52,20 @@ describe('VoteContainerComponent', () => {
     fixture.detectChanges();
     expect(component.books).toEqual(books);
   });
+
+  it('should move to the next book', function () {
+    component.ngOnInit();
+    expect(component.book).toEqual(books[0]);
+    component.nextBook();
+    expect(component.book).toEqual(books[1]);
+  });
+
+  it('should restart books at end', function () {
+    component.ngOnInit();
+    expect(component.book).toEqual(books[0]);
+    component.nextBook();
+    component.nextBook();
+    component.nextBook();
+    expect(component.book).toEqual(books[0]);
+  });
 });

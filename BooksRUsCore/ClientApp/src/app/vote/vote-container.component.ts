@@ -9,6 +9,7 @@ import {BookService} from "../book/book.service";
 })
 export class VoteContainerComponent implements OnInit {
   books: Book[];
+  book: Book;
 
   constructor(private bookService: BookService) {
   }
@@ -21,10 +22,24 @@ export class VoteContainerComponent implements OnInit {
     if (!this.books) {
       this.bookService.getBooks().subscribe((books) => {
           this.books = books;
+          this.setBook();
         }, (err) => {
           console.log(err);
         }
       );
     }
+  }
+
+  nextBook(): void {
+    const index =
+      this.books.indexOf(this.book) + 1 < this.books.length
+        ? this.books.indexOf(this.book) + 1
+        : 0
+    ;
+    this.book = this.books[index];
+  }
+
+  setBook() {
+    this.book = this.books ? this.books[0] : new Book('loading', 'loading', 'loading`');
   }
 }
