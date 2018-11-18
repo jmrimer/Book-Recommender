@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from "../book/book";
+import {Emotion} from "../emotion/emotion";
 
 @Component({
   selector: 'app-vote',
@@ -8,6 +9,7 @@ import {Book} from "../book/book";
 })
 export class VoteComponent implements OnInit {
   @Input() book: Book;
+  @Input() emotions: Emotion[];
   @Output('book') bookEmitter = new EventEmitter<Book>();
 
   constructor() { }

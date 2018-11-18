@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Book} from "../book/book";
 import {BookService} from "../book/book.service";
+import {Emotion} from "../emotion/emotion";
+import {EmotionService} from "../emotion/emotion.service";
 
 @Component({
   selector: 'app-vote-container',
@@ -10,12 +12,17 @@ import {BookService} from "../book/book.service";
 export class VoteContainerComponent implements OnInit {
   books: Book[];
   book: Book;
+  emotions: Emotion[];
 
-  constructor(private bookService: BookService) {
+  constructor(
+    private bookService: BookService,
+    private emotionService: EmotionService
+  ) {
   }
 
   ngOnInit() {
     this.getBooks();
+    this.getEmotions();
   }
 
   getBooks(): void {
@@ -27,6 +34,16 @@ export class VoteContainerComponent implements OnInit {
           console.log(err);
         }
       );
+    }
+  }
+
+  getEmotions(): void {
+    if (!this.emotions) {
+      this.emotionService.getEmotions().subscribe((emotions) => {
+        this.emotions = emotions;
+      }, (err) => {
+        console.log(err);
+      });
     }
   }
 

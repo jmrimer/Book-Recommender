@@ -1,9 +1,22 @@
 <div class="vote">
+  <ng-container *ngIf="emotions">
+    <div class="emotions" *ngFor="let emotion of emotions">
+      <input
+        id="{{emotion.emotionid}}"
+        class="emotion-selection"
+        value="{{emotion.emotionid}}"
+        type="checkbox"
+      />
+      <label for="{{emotion.emotionid}}">{{emotion.emotion}}</label>
+      <br/>
+    </div>
+  </ng-container>
   <ng-container *ngIf="book">
     <app-book [book]="book"></app-book>
   </ng-container>
   <button
     class="next-book"
     (click)="nextBook(book)"
-  >Next</button>
+  >Next
+  </button>
 </div>

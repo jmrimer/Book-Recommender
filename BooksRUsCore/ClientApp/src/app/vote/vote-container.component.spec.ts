@@ -7,10 +7,14 @@ import {BookComponent} from "../book/book.component";
 import {Book} from "../book/book";
 import {BookService} from "../book/book.service";
 import {Observable} from "rxjs";
+import {Emotion} from "../emotion/emotion";
+import {EmotionService} from "../emotion/emotion.service";
 
 describe('VoteContainerComponent', () => {
   let books: Book[];
   let bookServiceStub: Partial<BookService>;
+  let emotions: Emotion[];
+  let emotionServiceStub: Partial<EmotionService>;
   let component: VoteContainerComponent;
   let fixture: ComponentFixture<VoteContainerComponent>;
 
@@ -27,10 +31,22 @@ describe('VoteContainerComponent', () => {
       }
     };
 
+    emotions = [
+      new Emotion(1, 'emo1'),
+      new Emotion(2, 'emo2')
+    ];
+
+    emotionServiceStub = {
+      getEmotions: () => {
+        return Observable.of(emotions);
+      }
+    };
+
     TestBed.configureTestingModule({
       declarations: [VoteContainerComponent, VoteComponent, BookComponent],
       providers: [
-        {provide: BookService, useValue: bookServiceStub}
+        {provide: BookService, useValue: bookServiceStub},
+        {provide: EmotionService, useValue: emotionServiceStub},
       ]
     });
     fixture = TestBed.createComponent(VoteContainerComponent);
@@ -42,8 +58,6 @@ describe('VoteContainerComponent', () => {
   });
 
   it('should display a vote page', function () {
-    expect(fixture.debugElement.query(By.directive(VoteComponent))).toBeFalsy();
-    component.books = books;
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.directive(VoteComponent))).toBeTruthy();
   });
@@ -67,5 +81,10 @@ describe('VoteContainerComponent', () => {
     component.nextBook();
     component.nextBook();
     expect(component.book).toEqual(books[0]);
+  });
+
+  it('should get all the emotions on initialization', function () {
+    fixture.detectChanges();
+    expect(component.emotions).toEqual(emotions);
   });
 });

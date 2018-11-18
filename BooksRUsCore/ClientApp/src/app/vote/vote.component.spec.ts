@@ -4,14 +4,20 @@ import {VoteComponent} from './vote.component';
 import {BookComponent} from "../book/book.component";
 import {By} from "@angular/platform-browser";
 import {Book} from "../book/book";
+import {Emotion} from "../emotion/emotion";
 
 describe('VoteComponent', () => {
   let component: VoteComponent;
   let fixture: ComponentFixture<VoteComponent>;
   let book: Book;
+  let emotions: Emotion[];
 
   beforeEach(async(() => {
     book = new Book('t1', 'a1', 'p1');
+    emotions = [
+      new Emotion(1, 'e1'),
+      new Emotion(2, 'e2'),
+    ];
 
     TestBed.configureTestingModule({
       declarations: [VoteComponent, BookComponent]
@@ -47,4 +53,9 @@ describe('VoteComponent', () => {
     expect(clickSpy).toHaveBeenCalled();
   });
 
+  it('should display a checkbox for each emotion', function () {
+    component.emotions = emotions;
+    fixture.detectChanges();
+    expect(fixture.debugElement.queryAll(By.css('.emotion-selection')).length).toBe(2);
+  });
 });

@@ -2,6 +2,7 @@
   <ng-container *ngIf="book">
     <app-vote
       [book]="book"
+      [emotions]="emotions"
       (book)="nextBook($event)"
     ></app-vote>
   </ng-container>
