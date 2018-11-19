@@ -43,7 +43,7 @@ describe('VoteComponent', () => {
   });
 
   it('should have a next book button', function () {
-    expect(fixture.debugElement.query(By.css('button')).nativeElement.textContent).toBe('Next');
+    expect(fixture.debugElement.query(By.css('.next-book')).nativeElement.textContent).toBe('Next');
   });
 
   it('should trigger the inject function on button click', function () {
@@ -91,7 +91,7 @@ describe('VoteComponent', () => {
 
   it('should trigger its inject submit function on submit button click', function () {
     let clickSpy = jasmine.createSpy();
-    component.submitScores = clickSpy;
+    component.submitVotes = clickSpy;
     fixture.debugElement.query(By.css('.vote-button')).nativeElement.click();
     expect(clickSpy).toHaveBeenCalled();
   });

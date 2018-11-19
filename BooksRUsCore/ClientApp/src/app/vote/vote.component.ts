@@ -12,7 +12,6 @@ export class VoteComponent implements OnInit {
   @Input() emotions: Emotion[];
   @Output('book') bookEmitter = new EventEmitter<Book>();
   selectedEmotions: Emotion[] = [];
-  // @Output('emotions') emotionScoresEmitter = new EventEmitter<EmotionScore[]>();
 
   constructor() { }
 
@@ -32,6 +31,6 @@ export class VoteComponent implements OnInit {
     }
   }
 
-  submitScores() {
+  submitVotes() {
   }
 }
