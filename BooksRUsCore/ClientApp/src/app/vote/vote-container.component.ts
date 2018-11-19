@@ -3,6 +3,8 @@ import {Book} from "../book/book";
 import {BookService} from "../book/book.service";
 import {Emotion} from "../emotion/emotion";
 import {EmotionService} from "../emotion/emotion.service";
+import {Vote} from "./Vote";
+import {VoteService} from "./vote.service";
 
 @Component({
   selector: 'app-vote-container',
@@ -16,7 +18,8 @@ export class VoteContainerComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private emotionService: EmotionService
+    private emotionService: EmotionService,
+    private voteService: VoteService
   ) {
   }
 
@@ -58,5 +61,9 @@ export class VoteContainerComponent implements OnInit {
 
   setBook() {
     this.book = this.books ? this.books[0] : new Book('loading', 'loading', 'loading`');
+  }
+
+  submitVotes(votes: Vote[]) {
+    this.voteService.submitVotes(votes);
   }
 }
