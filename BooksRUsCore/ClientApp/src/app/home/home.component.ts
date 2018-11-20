@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Recommendation} from "../recommendation/recommendation";
-import {RecommendationService} from "../recommendation/recommendation.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Emotion} from "../emotion/emotion";
+import { Component, OnInit } from '@angular/core';
+import { Recommendation } from "../recommendation/recommendation";
+import { RecommendationService } from "../recommendation/recommendation.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Emotion } from "../emotion/emotion";
 
 @Component({
   selector: 'app-home',
@@ -23,9 +23,26 @@ export class HomeComponent implements OnInit {
 
   getRecommendations(): void {
     this.recommendationService.getRecommendations().subscribe((recommendations) => {
-      this.recommendations = recommendations;
-      }, (err) => {console.log(err);}
+        this.recommendations = this.shuffle(recommendations);
+      },
+      (err) => { console.log(err); }
     );
+  }
+
+
+  shuffle(array): Recommendation[] {
+    var currentIndex = array.length, tempValue, randomIndex;
+
+    while (0 != currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      tempValue = array[currentIndex]
+      array[currentIndex] = array[randomIndex]
+      array[randomIndex] = tempValue;
+    }
+
+    return array;
   }
 
   gotoRating(emotion: Emotion) {
