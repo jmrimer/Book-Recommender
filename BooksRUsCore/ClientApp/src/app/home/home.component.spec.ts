@@ -28,7 +28,9 @@ describe('HomeComponent', () => {
       new Recommendation(emotion1, book1),
       new Recommendation(emotion2, book2),
       new Recommendation(emotion3, book3),
-    ];
+      ];
+
+    shuffle(recommendations);
 
     recommendationServiceStub = {
       getRecommendations: () => {
@@ -63,5 +65,10 @@ describe('HomeComponent', () => {
     component.ngOnInit();
     expect(component.recommendations).toEqual(recommendations);
   });
+
+  it('should display in a different order each time it is loaded', function () {
+      //test functions for random order of recommendations?
+  });
 });
+
 

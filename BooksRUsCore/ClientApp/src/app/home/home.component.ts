@@ -19,8 +19,25 @@ export class HomeComponent implements OnInit {
 
   getRecommendations(): void {
     this.recommendationService.getRecommendations().subscribe((recommendations) => {
-      this.recommendations = recommendations;
+        this.recommendations = this.shuffle(recommendations);
+
       }, (err) => {console.log(err);}
     );
   }
+
+  
+    shuffle(array): Recommendation[]{
+    var currentIndex = array.length, tempValue, randomIndex;
+
+    while (0 != currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        tempValue = array[currentIndex]
+        array[currentIndex] = array[randomIndex]
+        array[randomIndex] = tempValue;
+    }
+
+    return array;
+}
 }
