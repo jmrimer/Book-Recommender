@@ -38,6 +38,12 @@ namespace Tests
         }
 
         [Fact]
+        public async Task AddOrUpdateTest()
+        {
+            
+        }
+        
+        [Fact]
         public async Task SubmitVotesTest()
         {
             var book = new Book {title = "title1", author = "author", PictureFilePath = "cover1"};
@@ -56,18 +62,18 @@ namespace Tests
 
             _context.EmotionScore.Add(score);
             _context.SaveChanges();
+            
+            score = _context.EmotionScore.FirstOrDefault((s) => s.emotionscoreid == score.emotionscoreid);
+            Assert.Equal(1, score.score);
 
             Vote[] votes = {new Vote {book = book, emotion = emotion1}};
-
+  
             using (var request = new HttpRequestMessage(HttpMethod.Post, "api/vote"))
             {
                 var json = JsonConvert.SerializeObject(votes);
                 using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
                 {
                     request.Content = stringContent;
-                    Console.Out.WriteLine("+++++++++++++++++");
-                    Console.Out.WriteLine(json);
-                    Console.Out.WriteLine(request);
                     using (var response = await _client
                         .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                         .ConfigureAwait(false))
@@ -76,14 +82,9 @@ namespace Tests
                     }
                 }
             }
-//            var response = await _client.SendAsync(request);
-//            var jsonResult = await response.Content.ReadAsStringAsync();
-//            var votes = JsonConvert.DeserializeObject<Vote[]>(jsonResult);
 
-//            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-
-            score = _context.EmotionScore.Find(score);
-            Assert.Equal(score.score, 2);
+            score = await _context.EmotionScore.FirstAsync((s) => s.emotionscoreid == score.emotionscoreid);
+            Assert.Equal(2, score.score);
         }
     }
 }

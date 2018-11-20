@@ -95,4 +95,11 @@ describe('VoteComponent', () => {
     fixture.debugElement.query(By.css('.vote-button')).nativeElement.click();
     expect(clickSpy).toHaveBeenCalled();
   });
+
+  it('should have instructions', function () {
+    component.emotions = emotions;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.instructions')).nativeElement.textContent)
+      .toBe('Which emotions best represent this book?');
+  });
 });

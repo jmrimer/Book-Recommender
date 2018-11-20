@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class VoteService {
-  private votesUrl = 'api/vote/SubmitVotes';
+  private votesUrl = 'api/vote';
 
   constructor(private http?: HttpClient) {
   }
