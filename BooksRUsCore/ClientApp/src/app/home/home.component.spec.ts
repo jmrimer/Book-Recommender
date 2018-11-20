@@ -72,7 +72,11 @@ describe('HomeComponent', () => {
   it('should route to a ratings page on emotion click', () => {
     component.recommendations = recommendations;
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.emotion')).nativeElement.click();
+    let emotions = fixture.debugElement.queryAll(By.css('.emotion'));
+    let emotion = emotions.find((emo) =>
+      emo.query(By.css('.recommendation-header')).nativeElement.textContent == 'emo1'
+    );
+    emotion.nativeElement.click();
     const spy = router.navigateByUrl as jasmine.Spy;
     const navArgs = spy.calls.first().args[0];
 
