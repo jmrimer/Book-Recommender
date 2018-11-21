@@ -39,6 +39,6 @@ export class VoteComponent implements OnInit {
     this.selectedEmotions.map((emo) => {
       votes.push(new Vote(this.book, emo));
     });
-    this.voteEmitter.emit(votes)
+    this.voteEmitter.emit(votes);
   }
 }
