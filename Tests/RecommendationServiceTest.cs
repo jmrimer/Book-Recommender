@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BooksRUs.Model.Core;
-using BooksRUs.Model.Core.DTOs;
 using BooksRUsCore.Controllers;
+using BooksRUsCore.DTOs;
 using FluentAssertions;
 using Microsoft.Rest.TransientFaultHandling;
 using Xunit;

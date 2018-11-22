@@ -19,10 +19,4 @@
       <ProjectReference Include="..\BooksRUsCore\BooksRUsCore.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="BooksRUs.Model.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\BooksRUs.Model.Core\BooksRUs.Model.Core\bin\Debug\netcoreapp2.1\BooksRUs.Model.Core.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>
