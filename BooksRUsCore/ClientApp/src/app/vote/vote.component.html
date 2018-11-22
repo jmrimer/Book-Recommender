@@ -22,16 +22,16 @@
       <app-book [book]="book"></app-book>
     </ng-container>
     <div class=".buttons">
-      <button
-        class="next-book"
-        (click)="nextBook(book)"
-      >Next
+      <button class="next-book"
+              (click)="nextBook(book)">
+        Next
       </button>
-      <button
-        class="vote-button"
-        (click)="submitVotes(); nextBook(book)"
-      >Submit
+      <button class="vote-button"
+              (click)="submitVotes(); nextBook(book)">
+        Submit
       </button>
+      <a routerLink="/"><button style="color: black">Go Home</button></a>
+
     </div>
   </div>
 </div>
