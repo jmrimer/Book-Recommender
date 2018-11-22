@@ -4,9 +4,8 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using BooksRUs.Model.Core;
-using BooksRUs.Model.Core.DTOs;
 using BooksRUsCore;
+using BooksRUsCore.DTOs;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -58,13 +57,13 @@ namespace Tests
             book = _context.Book.FirstOrDefault((b) => b.title == book.title);
             emotion1 = _context.Emotion.FirstOrDefault((e) => e.emotion == emotion1.emotion);
 
-            var score = new EmotionScore {bookid = book.bookid, emotionid = emotion1.emotionid, score = 1};
+            var score = new EmotionScore {emotionscoreid = 1, bookid = book.bookid, emotionid = emotion1.emotionid, score = 3};
 
             _context.EmotionScore.Add(score);
             _context.SaveChanges();
             
-            score = _context.EmotionScore.FirstOrDefault((s) => s.emotionscoreid == score.emotionscoreid);
-            Assert.Equal(1, score.score);
+            score = _context.EmotionScore.Find(1L);
+            Assert.Equal(3, score.score);
 
             Vote[] votes = {new Vote {book = book, emotion = emotion1}};
   
@@ -83,8 +82,8 @@ namespace Tests
                 }
             }
 
-            score = await _context.EmotionScore.FirstAsync((s) => s.emotionscoreid == score.emotionscoreid);
-            Assert.Equal(2, score.score);
+            score = _context.EmotionScore.Find(1L);
+            Assert.Equal(4, score.score);
         }
     }
 }

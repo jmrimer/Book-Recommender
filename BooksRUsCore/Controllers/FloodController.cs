@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BooksRUs.Model.Core;
+using BooksRUsCore.DTOs;
 using Google.Apis.Books.v1;
 using Google.Apis.Books.v1.Data;
 using Google.Apis.Requests;
@@ -32,7 +33,6 @@ namespace BooksRUsCore.Controllers
 
             foreach (Volume volume in volumes)
             {
-                Console.Out.WriteLine(volume.VolumeInfo.Title);
                 books.Add(serializeToBook(volume));
             }
 

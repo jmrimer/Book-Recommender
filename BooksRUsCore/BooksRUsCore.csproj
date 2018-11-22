@@ -30,21 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="BooksRUs.Model">
-      <HintPath>..\..\BooksRUs.Model\BooksRUs.Model\bin\Debug\BooksRUs.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="BooksRUs.Model.Core">
-      <HintPath>..\..\BooksRUs.Model.Core\BooksRUs.Model.Core\bin\Debug\netcoreapp2.1\BooksRUs.Model.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.TestHost, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-      <HintPath>..\..\..\.nuget\packages\microsoft.aspnetcore.testhost\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.TestHost.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.assert, Version=2.3.1.3858, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
-      <HintPath>..\..\..\.nuget\packages\xunit.assert\2.3.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.core, Version=2.3.1.3858, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
-      <HintPath>..\..\..\.nuget\packages\xunit.extensibility.core\2.3.1\lib\netstandard1.1\xunit.core.dll</HintPath>
-    </Reference>
+    <Folder Include="ClientApp\src\app\vote-container" />
+    <Folder Include="DTOs\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

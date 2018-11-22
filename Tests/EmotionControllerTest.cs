@@ -2,8 +2,9 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BooksRUs.Model.Core.DTOs;
+
 using BooksRUsCore;
+using BooksRUsCore.DTOs;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;

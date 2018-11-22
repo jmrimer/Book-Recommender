@@ -1,5 +1,4 @@
-using BooksRUs.Model.Core;
-using BooksRUs.Model.Core.DTOs;
+using BooksRUsCore.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BooksRUsCore

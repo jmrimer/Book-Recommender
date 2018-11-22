@@ -1,7 +1,7 @@
+using BooksRUsCore.DTOs;
 using System.Collections.Generic;
 using System.Linq;
-using BooksRUs.Model.Core;
-using BooksRUs.Model.Core.DTOs;
+
 
 namespace BooksRUsCore.Controllers
 {
