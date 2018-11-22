@@ -39,47 +39,22 @@ namespace Tests
         }
 
         [Fact]
-        public async Task Retrieve10BooksTest()
+        public async Task Retrieve40BooksTest()
         {
             FloodController subject = new FloodController(_context);
-            IList<Volume> books = await subject.getBooks();
-            Assert.Equal(10, books.Count);
+            IList<Volume> volumes = await subject.getVolumes();
+           
+            Assert.Equal(40, volumes.Count);
         }
 
         [Fact]
         public async Task SerializeVolumeIntoBookTest()
         {
             FloodController subject = new FloodController(_context);
-            IList<Volume> books = await subject.getBooks();
-//            Volume volume = (Volume) FormatterServices.GetUninitializedObject(typeof(Volume));
-//            
-//            Console.Out.WriteLine("+++++++++");
-//            Console.Out.WriteLine(volume.ToString());
-//            volume.VolumeInfo.Title = "title";
-////
-//            Console.Out.WriteLine(volume.ToString());
-//            volume = new Volume
-//            {
-//                VolumeInfo =
-//                {
-//                    Authors = new List<string>(new string[] {"author"}),
-//                    Title = "title",
-//                    ImageLinks =
-//                    {
-//                        Medium = "imageLink",
-//                    },
-//                }
-//            };
-//            Console.Out.WriteLine(volume.ToString());
-//            Book book = subject.serializeToBook(books[0]);
-//            Assert.Equal("author", book.author);
-//            Assert.Equal("title", book.title);
-//            Assert.Equal("imageLink", book.PictureFilePath);
-            
+            IList<Volume> books = await subject.getVolumes();
             Book book = subject.serializeToBook(books[0]);
             Assert.Equal(books[0].VolumeInfo.Authors[0], book.author);
             Assert.Equal(books[0].VolumeInfo.Title, book.title);
-            Assert.Equal(books[0].VolumeInfo.ImageLinks.Medium, book.PictureFilePath);
         }
 
         [Fact]
@@ -106,7 +81,7 @@ namespace Tests
             var response = await _client.SendAsync(request);
             
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(10, _context.Set<Book>().Count());
+            Assert.Equal(40, _context.Set<Book>().Count());
         }
         
     }

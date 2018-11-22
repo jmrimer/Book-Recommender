@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using BooksRUs.Model.Core;
-using Microsoft.AspNetCore.Mvc;
-using Google.Apis.Books;
 using Google.Apis.Books.v1;
 using Google.Apis.Books.v1.Data;
+using Google.Apis.Requests;
 using Google.Apis.Services;
 using Google.Apis.Util;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BooksRUsCore.Controllers
 {
@@ -27,27 +26,27 @@ namespace BooksRUsCore.Controllers
         public async Task Get()
         {
             var service = new BooksService(new BaseClientService.Initializer());
-            var volumes = await service.Volumes.List(
-                    "filter=free-ebooks"
-                )
-                .ExecuteAsync();
 
             List<Book> books = new List<Book>();
-            
-            foreach (Volume volume in volumes.Items)
+            IList<Volume> volumes = await getVolumes();
+
+            foreach (Volume volume in volumes)
             {
+                Console.Out.WriteLine(volume.VolumeInfo.Title);
                 books.Add(serializeToBook(volume));
             }
-            
+
             await saveBooks(books);
         }
 
-        public async Task<IList<Volume>> getBooks()
+        public async Task<IList<Volume>> getVolumes()
         {
             var service = new BooksService(new BaseClientService.Initializer());
-            var volumes = await service.Volumes
-                .List("filter=free-ebooks")
-                .ExecuteAsync();
+
+            var request = service.Volumes.List("a");
+            request.MaxResults = 40;
+
+            Volumes volumes = await request.ExecuteAsync();
             return volumes.Items;
         }
 
@@ -56,7 +55,7 @@ namespace BooksRUsCore.Controllers
             Book book = new Book()
             {
                 author = volume.VolumeInfo.Authors != null ? volume.VolumeInfo.Authors[0] : "unknown author",
-                title = volume.VolumeInfo.Title ?? "unknown title" ,
+                title = volume.VolumeInfo.Title ?? "unknown title",
                 PictureFilePath = getPicturePath(volume),
                 genreid = 1,
             };
@@ -76,6 +75,7 @@ namespace BooksRUsCore.Controllers
             {
                 return "";
             }
+
             if (volume.VolumeInfo.ImageLinks.Medium != null)
             {
                 return volume.VolumeInfo.ImageLinks.Medium;
