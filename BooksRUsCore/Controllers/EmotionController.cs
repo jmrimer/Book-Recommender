@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using BooksRUs.Model.Core;
-using BooksRUs.Model.Core.DTOs;
+using BooksRUsCore.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BooksRUsCore.Controllers
