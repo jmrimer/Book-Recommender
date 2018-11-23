@@ -1,8 +1,15 @@
 <div class="home">
-    <div class=".buttons">
-      <a routerLink="/vote"><button style="color: black;"> Vote on Books</button></a>
-    </div>
-    <h1>Recommendations</h1>
+    <div class="row">
+       <div class="col-md-2">
+       </div>
+       <div class="col-md-7">
+         <h1>Recommendations</h1>
+       </div>
+       <div class="col-md-3">
+           <a routerLink="/vote"><button style="color: black; display: inline-block"> Search </button></a>
+           <a routerLink="/vote"><button style="color: black; display: inline-block"> Vote </button></a>
+       </div>
+     </div>
     <div class="recommendations">
       <div *ngFor="let r of recommendations">
         <app-recommendation [recommendation]="r"></app-recommendation>
