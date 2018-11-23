@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BooksRUs.Model.Core;
 using BooksRUsCore;
 using BooksRUsCore.Controllers;
+using BooksRUsCore.DTOs;
 using Google.Apis.Books.v1;
 using Google.Apis.Books.v1.Data;
 using Microsoft.AspNetCore.Hosting;

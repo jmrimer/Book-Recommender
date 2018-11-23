@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Linq;
-using BooksRUs.Model.Core;
-using BooksRUs.Model.Core.DTOs;
+using BooksRUsCore.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.EntityFrameworkCore;
 
 namespace BooksRUsCore.Controllers
 {
