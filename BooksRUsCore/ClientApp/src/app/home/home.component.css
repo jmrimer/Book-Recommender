@@ -30,3 +30,7 @@ button {
   width: 125%;
   border-radius: 15px;
 }
+
+.emotion {
+  cursor: pointer;
+}

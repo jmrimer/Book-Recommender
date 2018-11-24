@@ -43,7 +43,7 @@ describe('VoteComponent', () => {
   });
 
   it('should have a next book button', function () {
-    expect(fixture.debugElement.query(By.css('.next-book')).nativeElement.textContent).toBe('Next');
+    expect(fixture.debugElement.query(By.css('.next-book')).nativeElement.textContent).toContain('Next');
   });
 
   it('should trigger the inject function on button click', function () {

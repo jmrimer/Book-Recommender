@@ -12,5 +12,17 @@ namespace BooksRUsCore.DTOs
         public int emotionid { get; set; }
         public long bookid { get; set; }
         public double score { get; set; }
+
+        public EmotionScore()
+        {
+        }
+
+        public EmotionScore(long emotionscoreid, int emotionid, long bookid, double score)
+        {
+            this.emotionscoreid = emotionscoreid;
+            this.emotionid = emotionid;
+            this.bookid = bookid;
+            this.score = score;
+        }
     }
 }

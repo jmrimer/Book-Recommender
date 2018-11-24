@@ -64,8 +64,6 @@ export class VoteContainerComponent implements OnInit {
   }
 
   submitVotes(votes: Vote[]) {
-    this.voteService.submitVotes(votes).subscribe(votes => {
-      console.log(votes);
-    });
+    this.voteService.submitVotes(votes).subscribe();
   }
 }

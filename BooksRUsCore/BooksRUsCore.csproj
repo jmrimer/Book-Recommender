@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\vote-container" />
     <Folder Include="DTOs\" />
   </ItemGroup>
 

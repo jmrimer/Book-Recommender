@@ -10,5 +10,15 @@ namespace BooksRUsCore.DTOs
     {
         public int emotionid { get; set; }
         public string emotion { get; set; }
+
+        public Emotion()
+        {
+        }
+
+        public Emotion(int emotionid, string emotion)
+        {
+            this.emotionid = emotionid;
+            this.emotion = emotion;
+        }
     }
 }

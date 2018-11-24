@@ -64,9 +64,9 @@ namespace Tests
             FloodController subject = new FloodController(_context);
             List<Book> books = new List<Book>()
             {
-                new Book{author = "a1", title = "title1", PictureFilePath = "pic1"},
-                new Book{author = "a2", title = "title2", PictureFilePath = "pic2"},
-                new Book{author = "a3", title = "title3", PictureFilePath = "pic3"},
+                new Book{author = "a1", title = "title1", pictureFilePath = "pic1"},
+                new Book{author = "a2", title = "title2", pictureFilePath = "pic2"},
+                new Book{author = "a3", title = "title3", pictureFilePath = "pic3"},
             };
             await subject.saveBooks(books);
 

@@ -52,15 +52,12 @@ namespace BooksRUsCore.Controllers
 
         public Book serializeToBook(Volume volume)
         {
-            Book book = new Book()
-            {
-                author = volume.VolumeInfo.Authors != null ? volume.VolumeInfo.Authors[0] : "unknown author",
-                title = volume.VolumeInfo.Title ?? "unknown title",
-                PictureFilePath = getPicturePath(volume),
-                genreid = 1,
-            };
-
-            return book;
+            var author = volume.VolumeInfo.Authors != null ? volume.VolumeInfo.Authors[0] : "unknown author";
+            var title = volume.VolumeInfo.Title ?? "unknown title";
+            var pictureFilePath = getPicturePath(volume);
+            var genreid = 1;
+         
+            return new Book(title, author, genreid, pictureFilePath);;
         }
 
         public async Task saveBooks(List<Book> books)

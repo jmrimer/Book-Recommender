@@ -46,12 +46,13 @@ describe('VoteContainerComponent', () => {
       }
     };
 
+    submitVotesSpy = jasmine.createSpy();
     voteServiceStub = {
       submitVotes: () => {
+        return Observable.of([new Vote(book1, emotion1), new Vote(book1, emotion2)]);
       }
     };
-    submitVotesSpy = jasmine.createSpy();
-    voteServiceStub.submitVotes = submitVotesSpy;
+
 
 
     TestBed.configureTestingModule({
@@ -99,11 +100,5 @@ describe('VoteContainerComponent', () => {
   it('should get all the emotions on initialization', function () {
     fixture.detectChanges();
     expect(component.emotions).toEqual(emotions);
-  });
-
-  it('should send votes to the votes service', function () {
-    const votes = [new Vote(book1, emotion1), new Vote(book1, emotion2)];
-    component.submitVotes(votes);
-    expect(voteServiceStub.submitVotes).toHaveBeenCalledWith(votes);
   });
 });

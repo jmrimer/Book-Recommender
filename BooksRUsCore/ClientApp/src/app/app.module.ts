@@ -14,6 +14,9 @@ import {VoteContainerComponent} from "./vote/vote-container.component";
 import {BookService} from "./book/book.service";
 import {EmotionService} from "./emotion/emotion.service";
 import {VoteService} from "./vote/vote.service";
+import {RatingsComponent} from './ratings/ratings.component';
+import { RatingsContainerComponent } from "./ratings/ratings-container/ratings-container.component";
+import {RatingsService} from "./ratings/ratings.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import {VoteService} from "./vote/vote.service";
     RecommendationComponent,
     BookComponent,
     VoteComponent,
-    VoteContainerComponent
+    VoteContainerComponent,
+    RatingsComponent,
+    RatingsContainerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -31,9 +36,10 @@ import {VoteService} from "./vote/vote.service";
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'vote', component: VoteContainerComponent, pathMatch: 'full'},
+      {path: 'ratings/:id', component: RatingsContainerComponent, pathMatch: 'full'},
     ]),
   ],
-  providers: [RecommendationService, BookService, EmotionService, VoteService],
+  providers: [RecommendationService, BookService, EmotionService, VoteService, RatingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

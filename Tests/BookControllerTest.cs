@@ -29,11 +29,11 @@ namespace Tests
             var options = new DbContextOptionsBuilder<BooksRUsDBContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
-            
+
             _context = server.Host.Services.GetService(typeof(BooksRUsDBContext)) as BooksRUsDBContext;
             _client = server.CreateClient();
         }
-        
+
         [Fact]
         public async Task GetAllBooksTest()
         {
@@ -41,9 +41,9 @@ namespace Tests
             {
                 title = "title1",
                 author = "author",
-                PictureFilePath = "cover1"
+                pictureFilePath = "cover1"
             };
-            
+
             _context.Book.Add(book);
             _context.SaveChanges();
 
@@ -51,7 +51,7 @@ namespace Tests
             var response = await _client.SendAsync(request);
             var jsonResult = await response.Content.ReadAsStringAsync();
             var books = JsonConvert.DeserializeObject<Book[]>(jsonResult);
-            
+
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             book.Should().BeEquivalentTo(books[0]);
         }

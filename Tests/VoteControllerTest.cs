@@ -45,7 +45,7 @@ namespace Tests
         [Fact]
         public async Task SubmitVotesTest()
         {
-            var book = new Book {title = "title1", author = "author", PictureFilePath = "cover1"};
+            var book = new Book {title = "title1", author = "author", pictureFilePath = "cover1"};
             var emotion1 = new Emotion {emotionid = 1, emotion = "rage"};
             var emotion2 = new Emotion {emotionid = 2, emotion = "joy"};
 

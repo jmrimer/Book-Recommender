@@ -11,8 +11,10 @@
        </div>
      </div>
     <div class="recommendations">
-      <div *ngFor="let r of recommendations">
+      <ng-container *ngFor="let r of recommendations">
+        <div class="emotion" (click)="gotoRating(r.emotion)">
         <app-recommendation [recommendation]="r"></app-recommendation>
-      </div>
+        </div>
+      </ng-container>
     </div>
   </div>

@@ -9,6 +9,7 @@ import {Emotion} from "../emotion/emotion";
 import {Recommendation} from "../recommendation/recommendation";
 import {RecommendationService} from "../recommendation/recommendation.service";
 import {Book} from "../book/book";
+import {Router} from "@angular/router";
 
 describe('HomeComponent', () => {
   let recommendationServiceStub: Partial<RecommendationService>;
@@ -22,6 +23,8 @@ describe('HomeComponent', () => {
   let book2: Book = new Book('title2', 'author2', 'cover2');
   let book3: Book = new Book('title3', 'author3', 'cover3');
   let recommendations: Recommendation[];
+  let router: Router;
+  const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
   beforeEach(async(() => {
     recommendations = [
@@ -39,10 +42,12 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent, RecommendationComponent, BookComponent],
       providers: [
-        {provide: RecommendationService, useValue: recommendationServiceStub}
+        {provide: RecommendationService, useValue: recommendationServiceStub},
+        {provide: Router, useValue: routerSpy}
       ]
     });
     fixture = TestBed.createComponent(HomeComponent);
+    router = fixture.debugElement.injector.get(Router);
     component = fixture.componentInstance;
   }));
 
@@ -62,6 +67,16 @@ describe('HomeComponent', () => {
   it('should retrieve emotion rankings from its service on initialization', function () {
     component.ngOnInit();
     expect(component.recommendations).toEqual(recommendations);
+  });
+
+  it('should route to a ratings page on emotion click', () => {
+    component.recommendations = recommendations;
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('.emotion')).nativeElement.click();
+    const spy = router.navigateByUrl as jasmine.Spy;
+    const navArgs = spy.calls.first().args[0];
+
+    expect(navArgs).toBe('/ratings/1');
   });
 });
 

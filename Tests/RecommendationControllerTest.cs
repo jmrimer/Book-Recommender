@@ -37,7 +37,7 @@ namespace TestProject1
         [Fact]
         public async Task GetAllRecommendationsTest()
         {
-            var book = new Book {bookid = 1L, title = "title", author = "author", PictureFilePath = "picturePath"};
+            var book = new Book(1L, "title", "author", "picturePath");
             var emotion = new Emotion {emotionid = 1, emotion = "joy"};
             var emotionScore = new EmotionScore {emotionscoreid = 1, emotionid = emotion.emotionid, bookid = book.bookid, score = 10};
             
