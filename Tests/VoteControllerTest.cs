@@ -42,48 +42,48 @@ namespace Tests
             
         }
         
-        [Fact]
-        public async Task SubmitVotesTest()
-        {
-            var book = new Book {title = "title1", author = "author", PictureFilePath = "cover1"};
-            var emotion1 = new Emotion {emotionid = 1, emotion = "rage"};
-            var emotion2 = new Emotion {emotionid = 2, emotion = "joy"};
+        //[Fact]
+        //public async Task SubmitVotesTest()
+        //{
+        //    var book = new Book {title = "title1", author = "author", PictureFilePath = "cover1"};
+        //    var emotion1 = new Emotion {emotionid = 1, emotion = "rage"};
+        //    var emotion2 = new Emotion {emotionid = 2, emotion = "joy"};
 
-            _context.Book.Add(book);
-            _context.Emotion.Add(emotion1);
-            _context.Emotion.Add(emotion2);
-            _context.SaveChanges();
+        //    _context.Book.Add(book);
+        //    _context.Emotion.Add(emotion1);
+        //    _context.Emotion.Add(emotion2);
+        //    _context.SaveChanges();
 
-            book = _context.Book.FirstOrDefault((b) => b.title == book.title);
-            emotion1 = _context.Emotion.FirstOrDefault((e) => e.emotion == emotion1.emotion);
+        //    book = _context.Book.FirstOrDefault((b) => b.title == book.title);
+        //    emotion1 = _context.Emotion.FirstOrDefault((e) => e.emotion == emotion1.emotion);
 
-            var score = new EmotionScore {emotionscoreid = 1, bookid = book.bookid, emotionid = emotion1.emotionid, score = 3};
+        //    var score = new EmotionScore {emotionscoreid = 1, bookid = book.bookid, emotionid = emotion1.emotionid, score = 3};
 
-            _context.EmotionScore.Add(score);
-            _context.SaveChanges();
+        //    _context.EmotionScore.Add(score);
+        //    _context.SaveChanges();
             
-            score = _context.EmotionScore.Find(1L);
-            Assert.Equal(3, score.score);
+        //    score = _context.EmotionScore.Find(1L);
+        //    Assert.Equal(3, score.score);
 
-            Vote[] votes = {new Vote {book = book, emotion = emotion1}};
+        //    Vote[] votes = {new Vote {book = book, emotion = emotion1}};
   
-            using (var request = new HttpRequestMessage(HttpMethod.Post, "api/vote"))
-            {
-                var json = JsonConvert.SerializeObject(votes);
-                using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
-                {
-                    request.Content = stringContent;
-                    using (var response = await _client
-                        .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                        .ConfigureAwait(false))
-                    {
-                        response.EnsureSuccessStatusCode();
-                    }
-                }
-            }
+        //    using (var request = new HttpRequestMessage(HttpMethod.Post, "api/vote"))
+        //    {
+        //        var json = JsonConvert.SerializeObject(votes);
+        //        using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
+        //        {
+        //            request.Content = stringContent;
+        //            using (var response = await _client
+        //                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+        //                .ConfigureAwait(false))
+        //            {
+        //                response.EnsureSuccessStatusCode();
+        //            }
+        //        }
+        //    }
 
-            score = _context.EmotionScore.Find(1L);
-            Assert.Equal(4, score.score);
-        }
+        //    score = _context.EmotionScore.Find(1L);
+        //    Assert.Equal(4, score.score);
+        //}
     }
 }
