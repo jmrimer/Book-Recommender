@@ -78,5 +78,19 @@ describe('HomeComponent', () => {
 
     expect(navArgs).toBe('/ratings/1');
   });
+
+  it('should render a filter button', () => {
+    let button = fixture.debugElement.query(By.css('.filter-button'));
+    expect(button).toBeTruthy();
+    expect(button.nativeElement.textContent).toBe('Filter');
+  });
+
+  it('should navigate to Ratings Page on filter button click', () => {
+    let button = fixture.debugElement.query(By.css('.filter-button'));
+    const spy = router.navigateByUrl as jasmine.Spy;
+    button.nativeElement.click();
+
+    expect(spy).toHaveBeenCalledWith('/ratings');
+  });
 });
 

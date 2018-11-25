@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
 import {RatingsContainerComponent} from "./ratings-container.component";
-import {Emotion} from "../../emotion/emotion";
+import {Emotion, EmotionFactoryStub} from "../../emotion/emotion";
 import {RatingsService} from "../ratings.service";
 import {Observable, ReplaySubject} from "rxjs";
 import {Rating, RatingFactoryStub} from "../Rating";
@@ -17,6 +17,7 @@ describe('RatingsContainerComponent', () => {
   let ratingsServiceStub: Partial<RatingsService>;
   const ratings = new RatingFactoryStub().build();
   let activatedRoute: ActivatedRouteStub;
+  const emotions = new EmotionFactoryStub().buildAll();
 
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
@@ -63,6 +64,23 @@ describe('RatingsContainerComponent', () => {
     fixture.detectChanges();
     expect(child.ratings).toBe(ratings);
   });
+
+  it('should display selection options for each emotion', () => {
+    // setup: do a testing fake/force that make the environemnet controlled RE: emotions
+    component.emotions = emotions;
+    // re-render virtual DOM
+    fixture.detectChanges();
+    // test
+    expect(fixture.debugElement.queryAll(By.css('input')).length).toBe(3);
+    expect(fixture.debugElement.queryAll(By.css('input'))[0].nativeElement.textContent).toBe('emo1');
+    expect(fixture.debugElement.queryAll(By.css('input'))[1].nativeElement.textContent).toBe('emo2');
+    expect(fixture.debugElement.queryAll(By.css('input'))[2].nativeElement.textContent).toBe('emo3');
+  });
+
+  it('should get all emotions on initialization', () => {
+    component.ngOnInit(); // the this.getAllEmotions call happens here
+    expect(component.emotions).toBe(emotions); // do that by making a emotionServiceStub (a la voting container spec)
+  }    );
 });
 
 /**

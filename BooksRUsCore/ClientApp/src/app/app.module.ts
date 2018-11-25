@@ -36,6 +36,7 @@ import {RatingsService} from "./ratings/ratings.service";
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'vote', component: VoteContainerComponent, pathMatch: 'full'},
+      {path: 'ratings', component: RatingsContainerComponent, pathMatch: 'full'},
       {path: 'ratings/:id', component: RatingsContainerComponent, pathMatch: 'full'},
     ]),
   ],

@@ -32,4 +32,10 @@ export class HomeComponent implements OnInit {
     let url = `/ratings/${emotion.emotionid}`;
     this.router.navigateByUrl(url);
   }
+
+  gotoRatingsPage() {
+    let url = `/ratings`;
+    this.router.navigateByUrl(url);
+  }
+
 }
