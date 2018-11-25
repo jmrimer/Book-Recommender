@@ -7,13 +7,15 @@ import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {RecommendationComponent} from "./recommendation/recommendation.component";
-import {BookComponent} from "./book/book.component";
+import { BookComponent } from "./book/book.component";
+import { BookVoteComponent } from "./book/bookVote.component";
 import {RecommendationService} from "./recommendation/recommendation.service";
 import {VoteComponent} from './vote/vote.component';
 import {VoteContainerComponent} from "./vote/vote-container.component";
 import {BookService} from "./book/book.service";
 import {EmotionService} from "./emotion/emotion.service";
-import {VoteService} from "./vote/vote.service";
+import { VoteService } from "./vote/vote.service";
+import { VoteLibraryComponent } from "./votelibrary/votelibrary.component";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {VoteService} from "./vote/vote.service";
     RecommendationComponent,
     BookComponent,
     VoteComponent,
-    VoteContainerComponent
+    VoteContainerComponent,
+    VoteLibraryComponent,
+    BookVoteComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -30,7 +34,8 @@ import {VoteService} from "./vote/vote.service";
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'vote', component: VoteContainerComponent, pathMatch: 'full'},
+      { path: 'vote', component: VoteContainerComponent, pathMatch: 'full' },
+      { path: 'votelibrary', component: VoteLibraryComponent, pathMatch: 'full' },
     ]),
   ],
   providers: [RecommendationService, BookService, EmotionService, VoteService],

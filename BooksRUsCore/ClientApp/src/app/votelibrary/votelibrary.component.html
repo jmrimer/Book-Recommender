@@ -1,0 +1,19 @@
+<div class="votelibrary">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-7">
+      <h1>Vote Libarary</h1>
+    </div>
+    <div class="col-md-3">
+      <a routerLink="/vote"><button style="color: black; display: inline-block"> Search </button></a>
+      <a routerLink="/vote"><button style="color: black; display: inline-block"> Vote </button></a>
+      <a routerLink="/"><button style="color: black">Go Home</button></a>
+    </div>
+  </div>
+  <div class="books">
+    <div *ngFor="let b of books">
+      <app-bookVote [book]="b"></app-bookVote>
+      </div>
+  </div>
+</div>
