@@ -12,6 +12,8 @@ import { Emotion } from "../emotion/emotion";
 })
 export class VoteLibraryComponent implements OnInit {
   books: Book[];
+  allbooks: Book[];
+  searchParams: string;
   //@Input() book: Book;
   //@Input() emotions: Emotion[];
   //@Output('book') bookEmitter = new EventEmitter<Book>();
@@ -28,7 +30,27 @@ export class VoteLibraryComponent implements OnInit {
   getBooks(): void {
     this.bookService.getBooks().subscribe((books) => {
       this.books = books;
+      this.allbooks = books;
     }, (err) => { console.log(err); }
     );
+  }
+  searchBooks() {
+    this.books = [];
+    for (var i = 0; i < this.allbooks.length; i++) {
+      var book = this.allbooks[i];
+      var author = book.author.toLowerCase();
+      var title = book.title.toLowerCase();
+      if ((title.includes(this.searchParams) || (author.includes(this.searchParams)))
+      {
+        this.books.push(book);       
+      }  
+    } 
+  }
+
+  resetBooks() {
+    this.books = this.allbooks;
+  }
+  updateSearch(value: string) {
+    this.searchParams = value.trim().toLowerCase();
   }
 }
