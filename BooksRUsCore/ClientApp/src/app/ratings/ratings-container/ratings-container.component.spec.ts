@@ -9,15 +9,18 @@ import {Book} from "../../book/book";
 import {ActivatedRoute, ChildActivationEnd, convertToParamMap, ParamMap, Params} from "@angular/router";
 import {RatingsComponent} from "../ratings.component";
 import {BookComponent} from "../../book/book.component";
+import {By} from "@angular/platform-browser";
+import {EmotionService} from "../../emotion/emotion.service";
 
 describe('RatingsContainerComponent', () => {
+  const emotions = new EmotionFactoryStub().buildAll();
+  const ratings = new RatingFactoryStub().build();
   let component: RatingsContainerComponent;
   let fixture: ComponentFixture<RatingsContainerComponent>;
   let child: RatingsComponent;
   let ratingsServiceStub: Partial<RatingsService>;
-  const ratings = new RatingFactoryStub().build();
   let activatedRoute: ActivatedRouteStub;
-  const emotions = new EmotionFactoryStub().buildAll();
+  let emotionServiceStub: Partial<EmotionService>;
 
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
@@ -29,6 +32,12 @@ describe('RatingsContainerComponent', () => {
       }
     };
 
+    emotionServiceStub = {
+      getEmotions: () => {
+        return Observable.of(emotions);
+      }
+    };
+
     TestBed.configureTestingModule({
       declarations: [
         RatingsContainerComponent,
@@ -37,7 +46,8 @@ describe('RatingsContainerComponent', () => {
       ],
       providers: [
         {provide: RatingsService, useValue: ratingsServiceStub},
-        {provide: ActivatedRoute, useValue: activatedRoute}
+        {provide: ActivatedRoute, useValue: activatedRoute},
+        {provide: EmotionService, useValue: emotionServiceStub}
       ]
     })
       .compileComponents();
@@ -47,7 +57,6 @@ describe('RatingsContainerComponent', () => {
     fixture = TestBed.createComponent(RatingsContainerComponent);
     component = fixture.componentInstance;
     child = fixture.debugElement.children[0].componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -55,6 +64,7 @@ describe('RatingsContainerComponent', () => {
   });
 
   it('should load a list of books based on emotion input', () => {
+    expect(component.ratings).toBeFalsy();
     component.ngOnInit();
     expect(component.ratings).toEqual(ratings);
   });
@@ -66,21 +76,39 @@ describe('RatingsContainerComponent', () => {
   });
 
   it('should display selection options for each emotion', () => {
-    // setup: do a testing fake/force that make the environemnet controlled RE: emotions
     component.emotions = emotions;
-    // re-render virtual DOM
     fixture.detectChanges();
-    // test
     expect(fixture.debugElement.queryAll(By.css('input')).length).toBe(3);
-    expect(fixture.debugElement.queryAll(By.css('input'))[0].nativeElement.textContent).toBe('emo1');
-    expect(fixture.debugElement.queryAll(By.css('input'))[1].nativeElement.textContent).toBe('emo2');
-    expect(fixture.debugElement.queryAll(By.css('input'))[2].nativeElement.textContent).toBe('emo3');
   });
 
   it('should get all emotions on initialization', () => {
-    component.ngOnInit(); // the this.getAllEmotions call happens here
-    expect(component.emotions).toBe(emotions); // do that by making a emotionServiceStub (a la voting container spec)
-  }    );
+    component.ngOnInit();
+    expect(component.emotions).toBe(emotions);
+  });
+
+  it('should filter the books on emotion selection', () => {
+    expect(component.ratings).toBeFalsy();
+    component.emotions = emotions;
+    fixture.detectChanges();
+    let emotion = fixture.debugElement.query(By.css('input'));
+    emotion.nativeElement.click();
+    expect(component.ratings).toBe(ratings);
+  });
+
+  it('should only allow a single selection', () => {
+    component.emotions = emotions;
+    fixture.detectChanges();
+    let emotionInputs = fixture.debugElement.queryAll(By.css('input'));
+    emotionInputs[0].nativeElement.click();
+    expect(emotionInputs[0].nativeElement.checked).toBeTruthy();
+    expect(emotionInputs[1].nativeElement.checked).toBeFalsy();
+    expect(emotionInputs[2].nativeElement.checked).toBeFalsy();
+    emotionInputs[1].nativeElement.click();
+    expect(emotionInputs[0].nativeElement.checked).toBeFalsy();
+    expect(emotionInputs[1].nativeElement.checked).toBeTruthy();
+    expect(emotionInputs[2].nativeElement.checked).toBeFalsy();
+
+  });
 });
 
 /**

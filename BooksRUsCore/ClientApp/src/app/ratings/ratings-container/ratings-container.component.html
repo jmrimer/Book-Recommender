@@ -1,3 +1,14 @@
 <div class="ratings-container">
+  <ng-container *ngFor="let emotion of emotions">
+    <input
+      id="{{emotion.emotionid}}"
+      class="emotion-selection"
+      value="{{emotion.emotionid}}"
+      type="radio"
+      name="emotionGroup"
+      (click)="getRatings(emotion.emotionid)"
+    />
+    <label for="{{emotion.emotionid}}">{{emotion.emotion}}</label>
+  </ng-container>
   <app-ratings [ratings]="ratings"></app-ratings>
 </div>
