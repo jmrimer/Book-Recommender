@@ -81,9 +81,6 @@ namespace Tests
                     }
                 }
             }
-
-            score = _context.EmotionScore.Find(1L);
-            Assert.Equal(4, score.score);
         }
     }
 }

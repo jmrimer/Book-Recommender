@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
 import {RatingsContainerComponent} from "./ratings-container.component";
-import {Emotion} from "../../emotion/emotion";
+import {Emotion, EmotionFactoryStub} from "../../emotion/emotion";
 import {RatingsService} from "../ratings.service";
 import {Observable, ReplaySubject} from "rxjs";
 import {Rating, RatingFactoryStub} from "../Rating";
@@ -9,14 +9,18 @@ import {Book} from "../../book/book";
 import {ActivatedRoute, ChildActivationEnd, convertToParamMap, ParamMap, Params} from "@angular/router";
 import {RatingsComponent} from "../ratings.component";
 import {BookComponent} from "../../book/book.component";
+import {EmotionService} from "../../emotion/emotion.service";
 
 describe('RatingsContainerComponent', () => {
+  const ratings = new RatingFactoryStub().build();
+  const emotions = new EmotionFactoryStub().buildAll();
   let component: RatingsContainerComponent;
   let fixture: ComponentFixture<RatingsContainerComponent>;
   let child: RatingsComponent;
   let ratingsServiceStub: Partial<RatingsService>;
-  const ratings = new RatingFactoryStub().build();
   let activatedRoute: ActivatedRouteStub;
+  let emotionServiceStub: Partial<EmotionService>;
+
 
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
@@ -28,6 +32,12 @@ describe('RatingsContainerComponent', () => {
       }
     };
 
+    emotionServiceStub = {
+      getEmotions: () => {
+        return Observable.of(emotions);
+      }
+    };
+
     TestBed.configureTestingModule({
       declarations: [
         RatingsContainerComponent,
@@ -36,7 +46,9 @@ describe('RatingsContainerComponent', () => {
       ],
       providers: [
         {provide: RatingsService, useValue: ratingsServiceStub},
-        {provide: ActivatedRoute, useValue: activatedRoute}
+        {provide: ActivatedRoute, useValue: activatedRoute},
+        {provide: EmotionService, useValue: emotionServiceStub}
+
       ]
     })
       .compileComponents();

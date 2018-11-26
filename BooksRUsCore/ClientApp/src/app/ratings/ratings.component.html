@@ -1,8 +1,11 @@
 <div class="ratings">
+  <ng-container *ngIf="emotion">
+    <h1>Top {{emotion.emotion}} books</h1>
+  </ng-container>
   <ng-container *ngFor="let rating of ratings">
     <div class="rating">
-      <span class="rank">{{rating.rank}}</span>
-      <app-book [book]="rating.book"></app-book>
+      <span class="rank">#{{rating.rank}}</span>
+      <app-book [book]="rating.book" class="book"></app-book>
     </div>
   </ng-container>
 </div>

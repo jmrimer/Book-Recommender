@@ -37,7 +37,7 @@ describe('RatingsComponent', () => {
     component.ratings = ratings;
     fixture.detectChanges();
     let rating = fixture.debugElement.query(By.css('.rating'));
-    expect(rating.query(By.css('.rank')).nativeElement.textContent).toBe('1');
+    expect(rating.query(By.css('.rank')).nativeElement.textContent).toBe('#1');
     expect(rating.query(By.directive(BookComponent))).toBeTruthy();
   });
 });

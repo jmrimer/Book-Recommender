@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Rating} from "./Rating";
+import {Emotion} from "../emotion/emotion";
 
 @Component({
   selector: 'app-ratings',
@@ -8,8 +9,10 @@ import {Rating} from "./Rating";
 })
 export class RatingsComponent implements OnInit {
   @Input() ratings: Rating[];
+  @Input() emotion: Emotion;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -1,0 +1,30 @@
+.ratings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ratings > h1 {
+  font-family: 'Poor Story';
+  font-size: 48px;
+  line-height: 60px;
+  text-transform: capitalize;
+  margin-bottom: 30px;
+}
+
+.ratings > .rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ratings > .rating > .rank {
+  font-family: 'Poor Story';
+  font-size: 36px;
+  margin-right: 48px;
+}
+
+.ratings > .rating > .book {
+  width: 240px;
+  margin-bottom: 30px;
+}
