@@ -4,5 +4,19 @@
 <div class="title">{{book.title}}</div>
 <div class="author">{{book.author}}</div>
 <div id="wrapper">
-  <button class="booKVoteButton" style="color: black; display:inline-block;">Vote</button>
+  <a routerLink="/vote"><button class="booKVoteButton" style="color: black; display:inline-block;">Vote</button></a>
 </div>
+<!--<div class="voteBlock hidden" ng-hide="show_me">
+  <div class="instructions">Which emotions best represent this book?</div>
+  <div class="emotions">
+    <ng-container *ngFor="let emotion of emotions">
+      <input id="{{emotion.emotionid}}"
+             class="emotion-selection"
+             value="{{emotion.emotionid}}"
+             type="checkbox"
+             (click)="selectEmotion(emotion)" />
+      <label for="{{emotion.emotionid}}">{{emotion.emotion}}</label>
+      <br />
+    </ng-container>
+  </div>
+</div>-->

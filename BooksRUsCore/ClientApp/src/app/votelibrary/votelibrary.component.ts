@@ -40,7 +40,7 @@ export class VoteLibraryComponent implements OnInit {
       var book = this.allbooks[i];
       var author = book.author.toLowerCase();
       var title = book.title.toLowerCase();
-      if ((title.includes(this.searchParams) || (author.includes(this.searchParams)))
+      if ((title.includes(this.searchParams) || (author.includes(this.searchParams))))
       {
         this.books.push(book);       
       }  

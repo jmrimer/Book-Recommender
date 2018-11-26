@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
-
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {RecommendationComponent} from "./recommendation/recommendation.component";
@@ -16,6 +15,8 @@ import {BookService} from "./book/book.service";
 import {EmotionService} from "./emotion/emotion.service";
 import { VoteService } from "./vote/vote.service";
 import { VoteLibraryComponent } from "./votelibrary/votelibrary.component";
+//import { BookVoteModalComponent } from "./bookVoteModal/bookVoteModal.component";
+//import { ModalService } from "./bookVoteModal/bookVoteModal.service";
 
 @NgModule({
   declarations: [

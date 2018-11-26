@@ -1,18 +1,23 @@
+<div class="jw-modal">
+  <div class="jw-modal-body">
+    <ng-content></ng-content>
+  </div>
+</div>
+<div class="jw-modal-background"></div>
+
 <div class="vote">
   <ng-container *ngIf="emotions">
     <div class="voting">
       <div class="instructions">Which emotions best represent this book?</div>
       <div class="emotions">
         <ng-container *ngFor="let emotion of emotions">
-          <input
-            id="{{emotion.emotionid}}"
-            class="emotion-selection"
-            value="{{emotion.emotionid}}"
-            type="checkbox"
-            (click)="selectEmotion(emotion)"
-          />
+          <input id="{{emotion.emotionid}}"
+                 class="emotion-selection"
+                 value="{{emotion.emotionid}}"
+                 type="checkbox"
+                 (click)="selectEmotion(emotion)" />
           <label for="{{emotion.emotionid}}">{{emotion.emotion}}</label>
-          <br/>
+          <br />
         </ng-container>
       </div>
     </div>
@@ -31,7 +36,7 @@
         Submit
       </button>
       <a routerLink="/"><button style="color: black">Go Home</button></a>
-      <a routerLink="/votelibrary"><button style="color: black">Library</button></a>
+
     </div>
   </div>
 </div>
