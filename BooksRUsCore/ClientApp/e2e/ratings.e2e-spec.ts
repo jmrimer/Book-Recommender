@@ -8,14 +8,14 @@ describe('Ratings', function () {
     page = new RatingsPage();
   });
 
-  it('should display the emotion title and rated books for the emotion', () => {
+  it('should display the emotionSelection title and rated books for the emotionSelection', () => {
     page.navigateTo();
 
     browser.wait(() => {
-      return element(by.css('.emotion-header')).isPresent();
+      return element(by.css('.emotionSelection-header')).isPresent();
     }, 5000);
 
-    expect(element(by.css('.emotion-header')).getText()).toBe('Top-rated books that invoke anger');
+    expect(element(by.css('.emotionSelection-header')).getText()).toBe('Top-rated books that invoke anger');
     expect(element.all(by.css('.book')).count()).toBeGreaterThan(0);
     expect(element(by.css('.ranking')).getText()).toBe('1');
   });

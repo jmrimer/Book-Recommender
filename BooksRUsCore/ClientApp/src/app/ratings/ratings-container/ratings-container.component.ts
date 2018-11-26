@@ -14,6 +14,7 @@ export class RatingsContainerComponent implements OnInit {
   @Input() emotion: Emotion;
   ratings: Rating[];
   emotions: Emotion[];
+  emotionSelections: EmotionSelection[];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,12 @@ export class RatingsContainerComponent implements OnInit {
     this.getEmotions();
   }
 
+  selectionsInit(emotions: Emotion[]) {
+    this.emotionSelections = emotions.map((emotion) => {
+      return new EmotionSelection(emotion, false);
+    });
+  }
+
   getRatings(emotionId: string) {
     this.ratingsService.getRatings(emotionId).subscribe(ratings => {
       this.ratings = ratings;
@@ -37,10 +44,20 @@ export class RatingsContainerComponent implements OnInit {
     });
   }
 
+  handleSelect(emotionSelection: EmotionSelection) {
+    this.getRatings(String(emotionSelection.emotion.emotionid));
+    this.emotionSelections.forEach((emoSelection) => {
+      if (emoSelection.emotion != emotionSelection.emotion) {
+        emoSelection.checked = false;
+      }
+    })
+  }
+
   getEmotions(): void {
     if (!this.emotions) {
       this.emotionService.getEmotions().subscribe((emotions) => {
         this.emotions = emotions;
+        this.selectionsInit(emotions);
       }, (err) => {
         console.log(err);
       });
@@ -48,4 +65,22 @@ export class RatingsContainerComponent implements OnInit {
   }
 
 
+}
+
+export class EmotionSelection {
+  constructor(private _emotion: Emotion, private _checked: boolean) {
+
+  }
+
+  get emotion(): Emotion {
+    return this._emotion;
+  }
+
+  get checked(): boolean {
+    return this._checked;
+  }
+
+  set checked(value: boolean) {
+    this._checked = value;
+  }
 }

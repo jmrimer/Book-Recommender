@@ -8,7 +8,7 @@ describe('App', () => {
     page = new AppPage();
   });
 
-  it('should display 6 emotion ratings with header', () => {
+  it('should display 6 emotionSelection ratings with header', () => {
     page.navigateTo();
 
     browser.wait(function() {

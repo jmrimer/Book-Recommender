@@ -64,12 +64,12 @@ describe('HomeComponent', () => {
     expect(fixture.debugElement.queryAll(By.directive(RecommendationComponent)).length).toBe(3);
   });
 
-  it('should retrieve emotion rankings from its service on initialization', function () {
+  it('should retrieve emotionSelection rankings from its service on initialization', function () {
     component.ngOnInit();
     expect(component.recommendations).toEqual(recommendations);
   });
 
-  it('should route to a ratings page on emotion click', () => {
+  it('should route to a ratings page on emotionSelection click', () => {
     component.recommendations = recommendations;
     fixture.detectChanges();
     fixture.debugElement.query(By.css('.emotion')).nativeElement.click();

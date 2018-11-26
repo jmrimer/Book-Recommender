@@ -1,14 +1,14 @@
 <div class="ratings-container">
-  <ng-container *ngFor="let emotion of emotions">
+  <ng-container *ngFor="let emotionSelection of emotionSelections">
     <input
-      id="{{emotion.emotionid}}"
+      id="{{emotionSelection.emotion.emotionid}}"
       class="emotion-selection"
-      value="{{emotion.emotionid}}"
-      type="radio"
-      name="emotionGroup"
-      (click)="getRatings(emotion.emotionid)"
+      value="{{emotionSelection.emotion.emotionid}}"
+      type="checkbox"
+      checked="{{emotionSelection.checked}}"
+      (click)="handleSelect(emotionSelection)"
     />
-    <label for="{{emotion.emotionid}}">{{emotion.emotion}}</label>
+    <label for="{{emotionSelection.emotion.emotionid}}">{{emotionSelection.emotion.emotion}}</label>
   </ng-container>
   <app-ratings [ratings]="ratings"></app-ratings>
 </div>

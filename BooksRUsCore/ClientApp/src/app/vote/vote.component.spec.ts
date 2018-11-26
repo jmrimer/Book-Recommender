@@ -53,21 +53,21 @@ describe('VoteComponent', () => {
     expect(clickSpy).toHaveBeenCalled();
   });
 
-  it('should display a checkbox for each emotion', function () {
+  it('should display a checkbox for each emotionSelection', function () {
     component.emotions = emotions;
     fixture.detectChanges();
-    expect(fixture.debugElement.queryAll(By.css('.emotion-selection')).length).toBe(2);
+    expect(fixture.debugElement.queryAll(By.css('.emotionSelection-selection')).length).toBe(2);
   });
 
-  it('should add an emotion to emotions when selected', function () {
+  it('should add an emotionSelection to emotions when selected', function () {
     expect(component.selectedEmotions.length).toBe(0);
     component.emotions = emotions;
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.emotion-selection')).nativeElement.click();
+    fixture.debugElement.query(By.css('.emotionSelection-selection')).nativeElement.click();
     expect(component.selectedEmotions.length).toBe(1);
   });
 
-  it('should remove an emotion from emotions when unselected', function () {
+  it('should remove an emotionSelection from emotions when unselected', function () {
     component.emotions = emotions;
     component.selectedEmotions = [emotions[0]];
     fixture.detectChanges();
@@ -76,7 +76,7 @@ describe('VoteComponent', () => {
     expect(component.selectedEmotions.length).toBe(0);
   });
 
-  it('should handle select adds or removes from emotion score array', function () {
+  it('should handle select adds or removes from emotionSelection score array', function () {
     let emo1 = new Emotion(1, '1');
     let emo2 = new Emotion(2, '2');
     let emos = [emo1, emo2];

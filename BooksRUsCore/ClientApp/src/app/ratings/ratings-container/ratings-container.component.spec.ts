@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {RatingsContainerComponent} from "./ratings-container.component";
+import {EmotionSelection, RatingsContainerComponent} from "./ratings-container.component";
 import {Emotion, EmotionFactoryStub} from "../../emotion/emotion";
 import {RatingsService} from "../ratings.service";
 import {Observable, ReplaySubject} from "rxjs";
@@ -15,6 +15,11 @@ import {EmotionService} from "../../emotion/emotion.service";
 describe('RatingsContainerComponent', () => {
   const emotions = new EmotionFactoryStub().buildAll();
   const ratings = new RatingFactoryStub().build();
+  const emotionSelections = [
+    new EmotionSelection(emotions[0], false),
+    new EmotionSelection(emotions[1], false),
+    new EmotionSelection(emotions[2], false),
+  ];
   let component: RatingsContainerComponent;
   let fixture: ComponentFixture<RatingsContainerComponent>;
   let child: RatingsComponent;
@@ -63,7 +68,7 @@ describe('RatingsContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load a list of books based on emotion input', () => {
+  it('should load a list of books based on emotionSelection input', () => {
     expect(component.ratings).toBeFalsy();
     component.ngOnInit();
     expect(component.ratings).toEqual(ratings);
@@ -75,7 +80,7 @@ describe('RatingsContainerComponent', () => {
     expect(child.ratings).toBe(ratings);
   });
 
-  it('should display selection options for each emotion', () => {
+  it('should display selection options for each emotionSelection', () => {
     component.emotions = emotions;
     fixture.detectChanges();
     expect(fixture.debugElement.queryAll(By.css('input')).length).toBe(3);
@@ -86,7 +91,11 @@ describe('RatingsContainerComponent', () => {
     expect(component.emotions).toBe(emotions);
   });
 
-  it('should filter the books on emotion selection', () => {
+  it('should set the emotionSelection selections all to false on initialization', () => {
+    component.ngOnInit();
+    expect(component.emotionSelections).toEqual(emotionSelections);
+  });
+  it('should filter the books on emotionSelection selection', () => {
     expect(component.ratings).toBeFalsy();
     component.emotions = emotions;
     fixture.detectChanges();
@@ -96,7 +105,7 @@ describe('RatingsContainerComponent', () => {
   });
 
   it('should only allow a single selection', () => {
-    component.emotions = emotions;
+    component.emotionSelections = emotionSelections;
     fixture.detectChanges();
     let emotionInputs = fixture.debugElement.queryAll(By.css('input'));
     emotionInputs[0].nativeElement.click();
