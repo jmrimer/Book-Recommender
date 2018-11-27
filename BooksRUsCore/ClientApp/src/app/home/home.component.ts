@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
   getRecommendations(): void {
     this.recommendationService.getRecommendations().subscribe((recommendations) => {
         this.recommendations = this.shuffle(recommendations);
-
       }, (err) => {console.log(err);}
     );
   }
