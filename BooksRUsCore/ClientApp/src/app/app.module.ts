@@ -28,8 +28,7 @@ import {RatingsService} from "./ratings/ratings.service";
     VoteComponent,
     VoteContainerComponent,
     VoteLibraryComponent,
-    BookVoteComponent
-    VoteContainerComponent,
+    BookVoteComponent,
     RatingsComponent,
     RatingsContainerComponent
   ],
