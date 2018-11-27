@@ -8,3 +8,19 @@ img {
   height: 300px;
   width: 180px;
 }
+
+#wrapper {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.booKVoteButton {
+  font-family: 'Poor Story';
+  font-size: 36px;
+  line-height: 45px;
+  align: center;
+  height: 15%;
+  border-radius: 15px;
+  margin-bottom: 50px;
+}

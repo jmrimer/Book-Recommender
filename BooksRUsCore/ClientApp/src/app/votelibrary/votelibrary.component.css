@@ -1,18 +1,17 @@
-.home {
+.votelibrary {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.recommendations {
+.books {
   display: flex;
   flex-wrap: wrap;
-
 }
 
-.recommendations > div {
-  flex: 1 0 33%;
-}
+  .books > div {
+    flex: 1 0 33%;
+  }
 
 h1 {
   font-family: 'Poor Story';
@@ -23,14 +22,10 @@ h1 {
 
 button {
   font-family: 'Poor Story';
-  font-size: 36px;
-  line-height: 45px;
+  font-size: 20px;
+  line-height: 24px;
   align: center;
-  height: 100%;
-  width: 250px;
-  border-radius: 15px;
-}
-
-.emotion {
-  cursor: pointer;
+  height: 50px;
+  width: 75px;
+  border-radius: 25px;
 }

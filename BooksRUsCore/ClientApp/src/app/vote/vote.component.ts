@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {Book} from "../book/book";
 import {Emotion} from "../emotion/emotion";
-import {Vote} from "./Vote";
-import {forEach} from "@angular/router/src/utils/collection";
+import { Vote } from "./Vote";
+import { forEach } from "@angular/router/src/utils/collection";
+
 
 @Component({
   selector: 'app-vote',
@@ -16,10 +17,12 @@ export class VoteComponent implements OnInit {
   @Output('vote') voteEmitter = new EventEmitter<Vote[]>();
   selectedEmotions: Emotion[] = [];
 
-  constructor() { }
+
+  constructor() {}
 
   ngOnInit() {
-  }
+   
+   }
 
   nextBook(book: Book) {
     this.bookEmitter.emit(book);
@@ -40,5 +43,6 @@ export class VoteComponent implements OnInit {
       votes.push(new Vote(this.book, emo));
     });
     this.voteEmitter.emit(votes);
+    window.location.href = "/votelibrary";
   }
 }
