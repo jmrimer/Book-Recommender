@@ -35,9 +35,9 @@ export class BookVoteComponent implements OnInit {
     //var el = $document.getElementById(this.book.bookid + "-voteBlock");
     //var el = angular.element(document.querySelector('#' + this.book.bookid + "-voteBlock"));
     //console.log(el);
-    
-  }
 
+  }
+}
 //  selectEmotion(emotion: Emotion) {
 //    let index = this.selectedEmotions.indexOf(emotion);
 //    if (index > -1) {

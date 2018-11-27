@@ -4,7 +4,7 @@
 <div class="title">{{book.title}}</div>
 <div class="author">{{book.author}}</div>
 <div id="wrapper">
-  <a routerLink="/vote"><button class="booKVoteButton" style="color: black; display:inline-block;">Vote</button></a>
+  <a routerLink="/vote/{{book.bookid}}"><button class="booKVoteButton" style="color: black; display:inline-block;">Vote</button></a>
 </div>
 <!--<div class="voteBlock hidden" ng-hide="show_me">
   <div class="instructions">Which emotions best represent this book?</div>

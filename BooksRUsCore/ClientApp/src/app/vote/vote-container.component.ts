@@ -4,7 +4,10 @@ import {BookService} from "../book/book.service";
 import {Emotion} from "../emotion/emotion";
 import {EmotionService} from "../emotion/emotion.service";
 import {Vote} from "./Vote";
-import {VoteService} from "./vote.service";
+import { VoteService } from "./vote.service";
+import { RouterModule, Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-vote-container',
@@ -15,19 +18,29 @@ export class VoteContainerComponent implements OnInit {
   books: Book[];
   book: Book;
   emotions: Emotion[];
+  id: number;
 
   constructor(
     private bookService: BookService,
     private emotionService: EmotionService,
-    private voteService: VoteService
+    private voteService: VoteService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.getBooks();
     this.getEmotions();
+    this.setId();
   }
 
+  setId(): void {
+    this.route.params.subscribe(params => {
+      this.id = +params['id']; 
+    });
+    console.log(this.id);
+  }
   getBooks(): void {
     if (!this.books) {
       this.bookService.getBooks().subscribe((books) => {
@@ -60,7 +73,17 @@ export class VoteContainerComponent implements OnInit {
   }
 
   setBook() {
-    this.book = this.books ? this.books[0] : new Book('loading', 'loading', 'loading`');
+    if ((this.books) && (this.id))
+    {
+      this.book = this.books.find(book => book.bookid === this.id);
+    }
+    else {
+      this.book = this.books[0];
+    }
+  }
+
+  gotoLibrary() {
+    console.log("hi");
   }
 
   submitVotes(votes: Vote[]) {

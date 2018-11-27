@@ -36,15 +36,19 @@ export class VoteLibraryComponent implements OnInit {
   }
   searchBooks() {
     this.books = [];
-    for (var i = 0; i < this.allbooks.length; i++) {
-      var book = this.allbooks[i];
-      var author = book.author.toLowerCase();
-      var title = book.title.toLowerCase();
-      if ((title.includes(this.searchParams) || (author.includes(this.searchParams))))
-      {
-        this.books.push(book);       
-      }  
-    } 
+    if (this.searchParams) {
+      for (var i = 0; i < this.allbooks.length; i++) {
+        var book = this.allbooks[i];
+        var author = book.author.toLowerCase();
+        var title = book.title.toLowerCase();
+        if ((title.includes(this.searchParams) || (author.includes(this.searchParams)))) {
+          this.books.push(book);
+        }
+      }
+    }
+    else {
+      this.books = this.allbooks;
+    }
   }
 
   resetBooks() {

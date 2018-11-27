@@ -35,6 +35,7 @@ import { VoteLibraryComponent } from "./votelibrary/votelibrary.component";
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
+      { path: 'vote/:id', component: VoteContainerComponent, pathMatch: 'full' },
       { path: 'vote', component: VoteContainerComponent, pathMatch: 'full' },
       { path: 'votelibrary', component: VoteLibraryComponent, pathMatch: 'full' },
     ]),
