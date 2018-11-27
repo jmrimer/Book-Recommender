@@ -5,8 +5,7 @@ import {Emotion} from "../emotion/emotion";
 import {EmotionService} from "../emotion/emotion.service";
 import {Vote} from "./Vote";
 import { VoteService } from "./vote.service";
-import { RouterModule, Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute, } from '@angular/router';
 
 
 @Component({
@@ -25,7 +24,6 @@ export class VoteContainerComponent implements OnInit {
     private emotionService: EmotionService,
     private voteService: VoteService,
     private route: ActivatedRoute,
-    private router: Router
   ) {
   }
 

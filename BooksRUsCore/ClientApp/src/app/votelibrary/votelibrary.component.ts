@@ -14,16 +14,11 @@ export class VoteLibraryComponent implements OnInit {
   books: Book[];
   allbooks: Book[];
   searchParams: string;
-  //@Input() book: Book;
-  //@Input() emotions: Emotion[];
-  //@Output('book') bookEmitter = new EventEmitter<Book>();
-  //@Output('vote') voteEmitter = new EventEmitter<Vote[]>();
 
   constructor(private bookService: BookService) {
   }
 
   ngOnInit() {
-    //this.getRecommendations();
     this.getBooks();
   }
 

@@ -15,8 +15,6 @@ import {BookService} from "./book/book.service";
 import {EmotionService} from "./emotion/emotion.service";
 import { VoteService } from "./vote/vote.service";
 import { VoteLibraryComponent } from "./votelibrary/votelibrary.component";
-//import { BookVoteModalComponent } from "./bookVoteModal/bookVoteModal.component";
-//import { ModalService } from "./bookVoteModal/bookVoteModal.service";
 
 @NgModule({
   declarations: [
