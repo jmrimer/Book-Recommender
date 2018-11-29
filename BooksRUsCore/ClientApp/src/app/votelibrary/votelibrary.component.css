@@ -22,10 +22,22 @@ h1 {
 
 button {
   font-family: 'Poor Story';
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 24px;
+  line-height: 30px;
   align: center;
-  height: 50px;
-  width: 75px;
-  border-radius: 25px;
+  height: 100%;
+  width: 150px;
+  border-radius: 15px;
+}
+
+.search-library {
+  /* search all titles/authors */
+  width: 100%;
+  font-family: Poor Story;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 24px;
+  color: #E5E5E5;
+  border-radius: 15px;
 }
