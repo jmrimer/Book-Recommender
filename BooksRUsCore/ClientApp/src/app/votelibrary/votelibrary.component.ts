@@ -1,9 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { BookService } from "../book/book.service";
 import { Book } from "../book/Book";
-//import { BookVote } from "../book/BookVote";
-import { Vote } from "../vote/Vote";
-import { Emotion } from "../emotion/emotion";
 
 @Component({
   selector: 'app-votelibrary',
